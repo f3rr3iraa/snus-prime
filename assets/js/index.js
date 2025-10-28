@@ -1,18 +1,44 @@
-let items = [];
+let products = []
+let filters = new Filters()
+
 
 async function loadProducts() {
     const response = await fetch('/data/products.csv');
     const data = await response.text();
     const rows = data.trim().split('\n');
     const headers = rows.shift().split(',').map(h => h.trim());
-    
-    items = rows.map(row => {
+
+    const headerMap = {
+        Marca: "brand",
+        Nome: "name",
+        Foto: "photoPath",
+        Preco: "price",
+        Forca: "power",
+        Sabor: "flavor",
+        Tipo: "type",
+        Tamanho: "size",
+        Nicotina_MG: "nicotine_mg",
+        Promo: "promotion",
+    };
+
+    products = rows.map(row => {
         const values = row.split(',').map(v => v.trim().replace(/^"|"$/g, ''));
-        return headers.reduce((obj, header, i) => {
-            obj[header] = values[i];
-            return obj;
-        }, {});
+        const product = new Product();
+
+        headers.forEach((header, i) => {
+            const prop = headerMap[header];
+            if (prop && prop in product) {
+                product[prop] = values[i];
+            }
+        });
+
+        return product;
     });
 }
 
-loadProducts();
+async function init() {
+    await loadProducts();
+}
+
+
+init();

@@ -62,13 +62,20 @@ const locationHandler = async () => {
 };
 
 async function changeActive(location) {
+    //document.getElementById('form-contacto').style.display = (location !== "/contactos") ? '' : 'none';
     console.log("location => ", location);
     switch (location) {
         case "/produtos":
+            await getFilterLimits();
             initRanges()
+            break;
+        case "/contactos":
+
+            
             break;
         default:
     }
+
 }
 
 function goToRoute(route) {

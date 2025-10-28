@@ -68,7 +68,7 @@ footer {
 }
 
 .container-product-section {
-  height: 92vh;
+  height: 184vh;
 }
 
 .container-grid {
@@ -117,7 +117,7 @@ footer {
   background: linear-gradient(135deg, #7a35e8, #954dfc);
   box-shadow: 0 8px 18px rgba(140, 69, 247, 0.45);
   color: #ffffff;
-  transform: scale(1.03);
+  transform: scale(1.02);
 }
 
 
@@ -173,7 +173,22 @@ footer {
 }
 
 
+.input-form {
+  border-radius: 0;
+  border-color: #eeeeee;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
 
+.input-form:focus {
+  outline: none; 
+  border-color: #cccccc; 
+  box-shadow: rgba(149, 157, 165, 0.3) 0px 4px 12px; 
+}
+
+
+.input-form::placeholder {
+    color: #bfbfbf;
+}
 
 .circle-maker {
   clip-path: circle(39% at 50% 50%);
