@@ -29,6 +29,11 @@ const routes = {
         title: "car",
         description: "Car Page",
     },
+    "/detalhes": {
+        template: "/templates/details.html",
+        title: "details",
+        description: "Details Page",
+    },
 }
 
 const route = (event) => {
@@ -62,16 +67,19 @@ const locationHandler = async () => {
 };
 
 async function changeActive(location) {
-    //document.getElementById('form-contacto').style.display = (location !== "/contactos") ? '' : 'none';
     console.log("location => ", location);
+    document.getElementById('form-contacto').classList.remove('d-none')
     switch (location) {
         case "/produtos":
             await getFilterLimits();
             initRanges()
+            renderBrandFilters();
+            renderPowerFilters();
+            renderSizeFilters();
+            await renderProducts();
             break;
         case "/contactos":
-
-            
+            document.getElementById('form-contacto').classList.add('d-none')
             break;
         default:
     }

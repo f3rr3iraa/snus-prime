@@ -1,20 +1,16 @@
 <div class="card border-1">
     <div class="position-relative">
-        <span class="badge bg-success position-absolute top-0 start-0 m-2">Novidade</span>
-        <img src="/data/img/cuba-cold-dry.jpg" class="card-img-top" alt="Pineapple Mango Coconut">
+        <span id="product-badge" class="badge position-absolute top-0 start-0 m-2"></span>
+        <img id="product-image" src="/data/img/cuba-cold-dry.jpg" class="card-img-top" alt="Pineapple Mango Coconut">
     </div>
     <div class="card-body text-start">
-        <p class="text-uppercase small text-muted mt-0">CUBA</p>
-        <h6 class="card-title fw-bold mb-1 mt-2">Cold Dry | 43 Mg</h6>
+        <p id="product-brand" class="text-uppercase small text-muted mt-0"></p>
+        <h6 id="product-name-nicotine" class="card-title fw-bold mb-1 mt-2"></h6>
         <p class="mb-1">
-            <span class="fw-bold">5.49€</span>
+            <span id="product-price" class="fw-bold"></span>
+            <span id="product-old-promo-price" class="text-decoration-line-through text-muted"></span>
         </p>
-        <select class="form-select form-select mt-2" aria-label="Small select example">
-            <option selected>x1 | 5.49€ </option>
-            <option value="1">x3 | 16.47€</option>
-            <option value="2">x5 | 27.45€</option>
-            <option value="3">x10 | 54.9€</option>
-        </select>
+        <button class="mt-2 p-2 btn-details w-100" onclick="goToRoute('/detalhes')">Detalhes</button>
         <button class="mt-2 p-2 btn-buy w-100">Adicionar</button>
     </div>
 </div>

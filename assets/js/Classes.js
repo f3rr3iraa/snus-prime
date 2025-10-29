@@ -16,6 +16,5 @@ class Filters {
     brands = [];
     powers = [];
     maxNicotine = null;
-    flavors = [];
     sizes = [];
 }
