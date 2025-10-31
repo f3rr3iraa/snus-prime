@@ -1,23 +1,32 @@
+
+
+/* container */
+
+.container-nav-section {
+  height: 30vh;
+}
+
+
+
+
+
+
 /* geral */
 
 html, body {
-  display: flex;
-  flex-direction: column;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
   background-color: #ffffff;
 }
 
+/* ---Index--- */
 
+/* Navbar */
 
 .background-navbar {
   background-color: #efefef;
-}
-
-.background-purple {
-    background: linear-gradient(135deg, #7a35e8, #954dfc);
-}
-
-.text-purple {
-  color: #8c45f7;
 }
 
 .nav-link {
@@ -35,6 +44,42 @@ html, body {
   height: 45px;
 }
 
+.navbar {
+  height: 8vh;
+}
+
+.offcanvas {
+  background-color: #efefef;
+}
+
+.offcanvas .nav-link {
+  font-size: 1.1rem;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.background-purple {
+    background: linear-gradient(135deg, #7a35e8, #954dfc);
+}
+
+.text-purple {
+  color: #8c45f7;
+}
+
+
+
 .icon {
   width: 40px;   
   height: 40px;
@@ -50,25 +95,22 @@ footer {
 
 
 /* container */
-.container-navbar {
-  height: 8vh;
-}
+
 
 .container-home {
-  height: 92vh;
+  height: 100vh;
   background-color: #efefef;
 }
 
 .container-inf {
-  height: 20vh;
+  min-height: 20vh;
+  padding: 2rem 0;  
 }
 
-.container-nav-section {
-  height: 30vh;
-}
+
 
 .container-product-section {
-  height: 184vh;
+  min-height: 75vh;
 }
 
 .container-grid {
@@ -76,8 +118,24 @@ footer {
 }
 
 .container-footer {
-  background-color: #efefef;
+  background-color: #ffffff;
 }
+
+
+  .contact-link {
+    color: #000 !important; 
+    text-decoration: none;
+    display: block;
+    margin-bottom: 0.2rem; 
+    transition: color 0.3s;
+  }
+
+  .contact-link:hover {
+    color: #bfbfbf !important; 
+  }
+
+
+
 
 /* carousel */
 .carousel-indicators .active {
@@ -89,11 +147,6 @@ footer {
     background-color: #8c45f7; 
 }
 
-
-/* borda grid */
-.thick-border {
-  border: 2px solid var(--bs-border-color, #dee2e6);
-}
 
 
 /* icon branco */

@@ -72,7 +72,7 @@ async function changeActive(location) {
     switch (location) {
         case "/produtos":
             await getFilterLimits();
-            initRanges()
+            await initRanges()
             renderBrandFilters();
             renderPowerFilters();
             renderSizeFilters();

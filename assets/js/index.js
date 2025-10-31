@@ -1,6 +1,6 @@
 let products = []
+let newProducts = []
 let filters = new Filters()
-
 
 async function loadProducts() {
     const response = await fetch('/data/products.csv');
@@ -38,7 +38,7 @@ async function loadProducts() {
 
 async function init() {
     await loadProducts();
+    newProducts = products.slice(-4).map(p => p.name);
 }
-
 
 init();

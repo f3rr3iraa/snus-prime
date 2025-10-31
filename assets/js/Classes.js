@@ -17,4 +17,10 @@ class Filters {
     powers = [];
     maxNicotine = null;
     sizes = [];
+
+    selectedMaxPrice = null;
+    selectedBrand = null;
+    selectedPower = null;
+    selectMaxNicotine = null;
+    selectedSize = null;
 }
