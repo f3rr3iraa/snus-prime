@@ -219,6 +219,6 @@ async function insertProductInfo(newProduct, element) {
     if (newProducts.includes(element.name)) {
         console.log(element.name)
         productBadge.textContent = "Novidade"
-        productBadge.classList.add("text-bg-info")
+        productBadge.classList.add("novidade-inf")
     }
 }

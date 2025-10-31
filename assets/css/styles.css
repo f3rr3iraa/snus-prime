@@ -1,16 +1,4 @@
 
-
-/* container */
-
-.container-nav-section {
-  height: 30vh;
-}
-
-
-
-
-
-
 /* geral */
 
 html, body {
@@ -21,7 +9,17 @@ html, body {
   background-color: #ffffff;
 }
 
+.background-purple {
+    background: linear-gradient(135deg, #7a35e8, #954dfc);
+}
+
+.text-purple {
+  color: #8c45f7;
+}
+
+
 /* ---Index--- */
+
 
 /* Navbar */
 
@@ -59,24 +57,42 @@ html, body {
 
 
 
+/* ---Produtos--- */
 
 
-
-
-
-
-
-
-
-
-
-.background-purple {
-    background: linear-gradient(135deg, #7a35e8, #954dfc);
+/* Filtros */
+.form-check-input {
+  border-radius: 0px !important;
+  border-color: #7a35e8;
 }
 
-.text-purple {
-  color: #8c45f7;
+.form-check-input:checked {
+  background-color: #7a35e8;
+  border-color: #7a35e8;
 }
+
+.form-check-input:focus {
+  box-shadow: none;
+  border-color: #7a35e8;
+}
+
+
+
+
+
+
+.novidade-inf {
+    background-color: #1c5a9d;
+    color: #ffffff;
+    padding: 4px 8px;
+    border-radius: 0px !important;  
+    display: inline-block;
+}
+
+
+
+
+
 
 
 
@@ -251,3 +267,17 @@ footer {
   width: 24px;
   height: 24px;
 }
+
+
+
+
+/* container */
+
+.container-nav-section {
+  height: 30vh;
+}
+
+
+
+
+

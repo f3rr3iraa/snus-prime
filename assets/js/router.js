@@ -91,6 +91,9 @@ function goToRoute(route) {
     locationHandler();
 }
 
+// update ano footer
+document.getElementById('current-year').textContent = new Date().getFullYear();
+
 window.onpopstate = locationHandler;
 window.route = route;
 locationHandler();
