@@ -9,6 +9,7 @@ class Product {
     size = null;
     nicotine_mg = null;
     promotion = null;
+    promoPrice = null;
 }
 
 class Filters {

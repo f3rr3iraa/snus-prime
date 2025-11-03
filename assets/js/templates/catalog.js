@@ -1,25 +1,38 @@
 
 function initRanges() {
-    // Range está mal quando se desce e volta a aumentar
-    const rangePrice = document.getElementById('range-price');
-    const rangePriceValue = document.getElementById('range-price-value');
-    const rangeNicotine = document.getElementById('range-nicotine');
-    const rangeNicotineValue = document.getElementById('range-nicotine-value');
+    const ranges = [
+        { id: 'range-price-desktop', unit: '€', max: filters.maxPrice, step: 0.01 },
+        { id: 'range-price-mobile', unit: '€', max: filters.maxPrice, step: 0.01 },
+        { id: 'range-nicotine-desktop', unit: 'Mg', max: filters.maxNicotine, step: 0.1 },
+        { id: 'range-nicotine-mobile', unit: 'Mg', max: filters.maxNicotine, step: 0.1 }
+    ]
 
-    rangePriceValue.textContent = `${filters.maxPrice}€`;
-    rangeNicotineValue.textContent = `${filters.maxNicotine} Mg`;
+    ranges.forEach(({ id, unit, max, step }) => {
+        const range = document.getElementById(id)
+        const valueOutput = document.getElementById(`${id}-value`)
+        if (!range || !valueOutput) return;
 
-    rangePrice.max = filters.maxPrice;
-    rangeNicotine.max = filters.maxNicotine;
-    rangePrice.value = filters.maxPrice;
-    rangeNicotine.value = filters.maxNicotine;
+        range.min = 0;
+        range.step = step ?? 1;
+        range.max = max;
+        range.value = max;
 
-    rangePrice.addEventListener('input', function () {
-        rangePriceValue.textContent = `${this.value}€`;
-    });
-    rangeNicotine.addEventListener('input', function () {
-        rangeNicotineValue.textContent = `${this.value} Mg`;
-    });
+        valueOutput.textContent = Number(range.value).toFixed(getDecimals(step)) + unit;
+
+        range.addEventListener('input', () => {
+            valueOutput.textContent = Number(range.value).toFixed(getDecimals(step)) + unit;
+
+            if (id.includes('price')) filters.selectedMaxPrice = Number(range.value);
+            if (id.includes('nicotine')) filters.selectMaxNicotine = Number(range.value);
+
+            applyFilters();
+        })
+    })
+}
+
+function getDecimals(step) {
+    const stepStr = step.toString();
+    return stepStr.includes('.') ? stepStr.split('.')[1].length : 0;
 }
 
 async function getFilterLimits() {
@@ -31,6 +44,7 @@ async function getFilterLimits() {
     filters.flavors = [...new Set(products.map(p => p.flavor))];
     filters.sizes = [...new Set(products.map(p => p.size))];
     console.log(filters)
+    console.log(products)
 }
 
 async function renderBrandFilters() {
@@ -174,6 +188,11 @@ async function applyFilters() {
         filteredProducts = filteredProducts.filter(p => p.power === filters.selectedPower);
     if (filters.selectedSize)
         filteredProducts = filteredProducts.filter(p => p.size === filters.selectedSize);
+    if (filters.selectedMaxPrice != null)
+        filteredProducts = filteredProducts.filter(p => p.price <= filters.selectedMaxPrice);
+    if (filters.selectMaxNicotine != null)
+        filteredProducts = filteredProducts.filter(p => p.nicotine_mg <= filters.selectMaxNicotine);
+
 
     renderProducts(filteredProducts)
 }
@@ -217,8 +236,12 @@ async function insertProductInfo(newProduct, element) {
     productOldPrice.classList.add('d-none');
 
     if (newProducts.includes(element.name)) {
-        console.log(element.name)
         productBadge.textContent = "Novidade"
         productBadge.classList.add("novidade-inf")
+    }
+
+    if (element.promotion != 0) {
+        productBadge.textContent = "Promoção"
+        productBadge.classList.add("promotion-inf")
     }
 }

@@ -32,6 +32,16 @@ async function loadProducts() {
             }
         });
 
+        product.price = parseFloat(product.price) || 0;
+        product.promotion = parseFloat(product.promotion) || 0;
+
+        if (product.promotion !== 0) {
+            const discount = product.promotion / 100;
+            product.promoPrice = +(product.price * (1 - discount)).toFixed(2);
+        } else {
+            product.promoPrice = product.price;
+        }
+
         return product;
     });
 }

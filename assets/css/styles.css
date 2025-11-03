@@ -89,6 +89,13 @@ html, body {
     display: inline-block;
 }
 
+.promotion-inf {
+    background-color: #9d1f1c ;
+    color: #ffffff;
+    padding: 4px 8px;
+    border-radius: 0px !important;  
+    display: inline-block;
+}
 
 
 
