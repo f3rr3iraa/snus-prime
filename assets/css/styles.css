@@ -42,6 +42,14 @@ html, body {
   height: 45px;
 }
 
+.breadcrumb-link:hover {
+  text-decoration: none;
+  cursor: pointer;
+}
+
+
+
+
 .navbar {
   height: 8vh;
 }
@@ -198,6 +206,49 @@ footer {
 
 
 
+
+
+
+
+
+
+
+.btn-see-details {
+  position: absolute;
+  bottom: 4%; 
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  background: linear-gradient(135deg, #8c45f7, #a56dfc);
+  border: none;
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 1.1rem;
+  padding: 10px 0;
+  transition: all 0.3s ease;
+  letter-spacing: 0.5px;
+  opacity: 0;
+  visibility: hidden;
+}
+
+/* Mostra no hover */
+.product-see-details:hover .btn-see-details {
+  opacity: 1;
+  visibility: visible;
+}
+
+
+.product-see-details:hover {
+  cursor: pointer;
+  transition: filter 0.3s ease;
+}
+
+
+
+
+
+
+
 /* ---home--- */
 
 /* carousel */
@@ -288,3 +339,7 @@ footer {
 
 
 
+/* */
+.container-nav-details {
+  height: 8vh;
+}

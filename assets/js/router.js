@@ -25,9 +25,9 @@ const routes = {
         description: "Contacts Page",
     },
     "/carrinho": {
-        template: "/templates/car.html",
-        title: "car",
-        description: "Car Page",
+        template: "/templates/cart.html",
+        title: "cart",
+        description: "Cart Page",
     },
     "/detalhes": {
         template: "/templates/details.html",
