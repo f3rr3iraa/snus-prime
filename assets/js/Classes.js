@@ -5,11 +5,11 @@ class Product {
     price = null;
     power = null;
     flavor = null;
-    type = null;
+    description = null;
     size = null;
     nicotine_mg = null;
     promotion = null;
-    promoPrice = null;
+    oldPrice = null;
 }
 
 class Filters {

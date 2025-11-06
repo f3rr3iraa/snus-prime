@@ -1,13 +1,13 @@
-Marca,Nome,Foto,Preco,Forca,Sabor,Tipo,Tamanho,Nicotina_MG,Promo
-CUBA,Cold Dry,cuba-cold-dry,5.49,FORTE,MENTA,Bolsa de Nicotina,SLIM,43,0
-VELO,Icy Berries,velo-icy-berries,4.99,NORMAL,BERRY,Bolsa de Nicotina,SLIM,8,0
-VELO,Watermelon Ice,velo-watermelon-ice,4.99,NORMAL,WATERMELON ICE,Bolsa de Nicotina,SLIM,10,0
-VELO,Strawberry Ice,velo-strawberry-ice,4.99,NORMAL,STRAWBERRY ICE,Bolsa de Nicotina,SLIM,10,0
-ICEBERG,Pineapple Mango Coconut,iceberg-pineapple-mango-coconut,5.49,EXTRA-FORTE,PINEAPPLE COCONUT,Bolsa de Nicotina,SLIM,30,0
-ICEBERG,Watermelon Lime,iceberg-watermelon-lime,5.49,EXTRA-FORTE,WATERMELON LIME,Bolsa de Nicotina,SLIM,30,0
-PABLO,Mini Ice Cold,pablo-mini-ice-cold,4.99,EXTRA-FORTE,MENTA,Bolsa de Nicotina,MINI,15,0
-PABLO,Exclusive Cherry Cola,pablo-exclusive-cherry-cola,5.49,EXTRA-FORTE,COLA CHERRY,Bolsa de Nicotina,SLIM,30,0
-KILLA,Frosted Mint,killa-frosted-mint,4.99,NORMAL,MENTA,Bolsa de Nicotina,SLIM,11.2,0
-KILLA,Watermelon,killa-watermelon,4.99,SLIM,WATERMELON,Bolsa de Nicotina,SLIM,11.2,0
-KILLA,Energy,killa-energy,4.99,FORTE,RED FRUIT,Bolsa de Nicotina,SLIM,11.2,0
-TESTE,TESTE,cuba-cold-dry,5.99,TESTE,TESTE,Bolsa de Nicotina,SLIM,50,25
+Marca,Nome,Foto,Preco,Forca,Sabor,Descrição,Tamanho,Nicotina_MG,Promo
+CUBA,Cold Dry,cuba-cold-dry,5.49,FORTE,MENTA,Experimente o CUBA Cold Dry Strong: força intensa de 35-45 mg de nicotina com sabor refrescante de menta. Ideal para quem busca potência e frescor em cada uso.,SLIM,43,0
+VELO,Icy Berries,velo-icy-berries,4.99,NORMAL,BERRY,Descubra o VELO Icy Berries: uma combinação refrescante de sabor de frutas vermelhas e sensação gelada. Experimente a qualidade da British American Tobacco.,SLIM,8,0
+VELO,Watermelon Ice,velo-watermelon-ice,4.99,NORMAL,WATERMELON ICE,Experimente o VELO Watermelon Ice: uma bolsa de nicotina refrescante com sabor de melancia e um toque gelado. Ideal para quem busca uma alternativa moderna e prática ao tabaco.,SLIM,10,0
+VELO,Strawberry Ice,velo-strawberry-ice,4.99,NORMAL,STRAWBERRY ICE,"Experimente o VELO Strawberry Ice: refrescante, saboroso e com 10 mg de nicotina. Ideal para todos os paladares.",SLIM,10,0
+ICEBERG,Pineapple Mango Coconut,iceberg-pineapple-mango-coconut,5.49,EXTRA-FORTE,PINEAPPLE COCONUT,"Iceberg Pineapple Mango Coconut são saquetas de nicotina com um teor de nicotina de 50 mg/g. As saquetas de nicotina têm uma deliciosa combinação de sabores: ananás, manga e coco.",SLIM,30,0
+ICEBERG,Watermelon Lime,iceberg-watermelon-lime,5.49,EXTRA-FORTE,WATERMELON LIME,Iceberg Watermelon Lime são saquetas de nicotina com um teor de nicotina de 50 mg/g. As saquetas de nicotina têm uma combinação de sabor agridoce de: melancia e lima.,SLIM,30,0
+PABLO,Mini Ice Cold,pablo-mini-ice-cold,4.99,EXTRA-FORTE,MENTA,Pablo Mini Ice Cold são bolsas de nicotina com um tamanho muito pequeno (mini). Uma (pequena) cópia do conhecido Pablo Ice Cold. As bolsas têm exactamente o mesmo sabor (Menta) e o mesmo teor de nicotina (30 mg/g).,MINI,15,0
+PABLO,Exclusive Cherry Cola,pablo-exclusive-cherry-cola,5.49,EXTRA-FORTE,COLA CHERRY,Os novos saquinhos de nicotina potentes da NGP têm um teor de nicotina de 50 mg/g. Os saquinhos de PABLO Exclusive Cherry Cola também têm um delicioso sabor doce de: cola de cereja.,SLIM,30,0
+KILLA,Frosted Mint,killa-frosted-mint,4.99,NORMAL,MENTA,PABLO Exclusive Frosted Mint são sacos de nicotina com um teor de nicotina de 50 mg/g. As bolsas têm o sabor de: Casa da Moeda. O que é extra fresco devido à parte do gelo.,SLIM,11.2,0
+KILLA,Watermelon,killa-watermelon,4.99,SLIM,WATERMELON,"Experimente a refrescância do KILLA Watermelon! Com sabor equilibrado e 11.2 mg de nicotina, é ideal para todos. Compre agora e descubra por que é tão popular!",SLIM,11.2,0
+KILLA,Energy,killa-energy,4.99,FORTE,RED FRUIT,"Experimente a KILLA Energy: bolsas de nicotina com sabor de fruta vermelha e 11.2 mg de nicotina. Discretas e potentes, são a escolha ideal para quem busca qualidade e satisfação.",SLIM,11.2,0
+TESTE-marca,TESTE-nome,cuba-cold-dry,5.99,TESTE-forca,TESTE-sabor,"Teste, Teste",TESTE-tamanto,50,25

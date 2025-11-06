@@ -10,7 +10,7 @@
             <span id="product-price" class="fw-bold"></span>
             <span id="product-old-promo-price" class="text-decoration-line-through text-muted"></span>
         </p>
-        <button class="mt-2 p-2 btn-details w-100 btn-sm" onclick="goToRoute('/detalhes')">Detalhes</button>
-        <button class="mt-2 p-2 btn-buy w-100 btn-sm">Adicionar</button>
+        <button class="mt-2 p-2 btn-details w-100 btn-sm" id="product-details" onclick="goToProduct(this.dataset.id)">Detalhes</button>
+        <button class="mt-2 p-2 btn-buy w-100 btn-sm" id="product-add" onclick="addToCart(this.dataset.id)">Adicionar</button>
     </div>
 </div>

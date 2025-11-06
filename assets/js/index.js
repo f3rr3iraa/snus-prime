@@ -1,12 +1,46 @@
 let products = []
 let newProducts = []
 let filters = new Filters()
+let cart = []
+
+function getRandomIndexes(array) {
+  const indexes = [];
+  const max = array.length - 1;
+
+  while (indexes.length < 4) {
+    const randomIndex = Math.floor(Math.random() * (max + 1));
+    if (!indexes.includes(randomIndex)) {
+      indexes.push(randomIndex);
+    }
+  }
+
+  return indexes;
+}
+
+function getRandom(array) {
+  const index = [];
+  const max = array.length - 1;
+
+  while (index.length < 1) {
+    const randomIndex = Math.floor(Math.random() * (max + 1));
+    if (!index.includes(randomIndex)) {
+      index.push(randomIndex);
+    }
+  }
+
+  return index;
+}
+
 
 async function loadProducts() {
     const response = await fetch('/data/products.csv');
-    const data = await response.text();
-    const rows = data.trim().split('\n');
-    const headers = rows.shift().split(',').map(h => h.trim());
+    const csvText = await response.text();
+
+    // Usa PapaParse
+    const results = Papa.parse(csvText, {
+        header: true,
+        skipEmptyLines: true
+    });
 
     const headerMap = {
         Marca: "brand",
@@ -15,20 +49,18 @@ async function loadProducts() {
         Preco: "price",
         Forca: "power",
         Sabor: "flavor",
-        Tipo: "type",
+        Descrição: "description",
         Tamanho: "size",
         Nicotina_MG: "nicotine_mg",
         Promo: "promotion",
     };
 
-    products = rows.map(row => {
-        const values = row.split(',').map(v => v.trim().replace(/^"|"$/g, ''));
+    products = results.data.map(row => {
         const product = new Product();
 
-        headers.forEach((header, i) => {
-            const prop = headerMap[header];
-            if (prop && prop in product) {
-                product[prop] = values[i];
+        Object.entries(headerMap).forEach(([csvHeader, prop]) => {
+            if (prop in product && row[csvHeader] !== undefined) {
+                product[prop] = row[csvHeader].trim();
             }
         });
 
@@ -37,9 +69,10 @@ async function loadProducts() {
 
         if (product.promotion !== 0) {
             const discount = product.promotion / 100;
-            product.promoPrice = +(product.price * (1 - discount)).toFixed(2);
+            product.oldPrice = product.price;
+            product.price = +(product.price * (1 - discount)).toFixed(2);
         } else {
-            product.promoPrice = product.price;
+            product.oldPrice = product.price;
         }
 
         return product;
@@ -49,6 +82,9 @@ async function loadProducts() {
 async function init() {
     await loadProducts();
     newProducts = products.slice(-4).map(p => p.name);
+
+    console.log(products);
+    locationHandler();
 }
 
 init();

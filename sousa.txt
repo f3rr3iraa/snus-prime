@@ -1,0 +1,189 @@
+const routes = {
+    404: {
+        template: "index.html",
+        title: "404"
+    },
+    "/": {
+        template: "../pages/mainpage.html",
+        title: "mainpage"
+    },
+    "/catalog": {
+        template: "../pages/catalog.html",
+        title: "catalog"
+    },
+    "/services": {
+        template: "../pages/services.html",
+        title: "services"
+    },
+    "/contact": {
+        template: "../pages/contact.html",
+        title: "contact"
+    },
+    "/aboutus": {
+        template: "../pages/about-us.html",
+        title: "aboutus"
+    },
+    "/kitchens": {
+        template: "../pages/services/kitchens.html",
+        title: "kitchens"
+    },
+    "/bathrooms": {
+        template: "../pages/services/bathrooms.html",
+        title: "bathrooms"
+    },
+    "/funeral-art": {
+        template: "../pages/services/funeral-art.html",
+        title: "funeral-art"
+    },
+    "/miscellaneous": {
+        template: "../pages/services/miscellaneous.html",
+        title: "miscellaneous"
+    },
+    "/privacy-policy": {
+        template: "../pages/privacy-policy.html",
+        title: "privacy-policy"
+    },
+};
+
+document.addEventListener("click", (e) => {
+    const { target } = e;
+    if (target.matches("nav a")) {
+        e.preventDefault();
+        route(e);
+    }
+});
+
+const route = (event) => {
+    event = event || window.event;
+    event.preventDefault();
+    const targetUrl = new URL(event.target.href, window.location.origin);
+    if (targetUrl.origin === window.location.origin) {
+
+        window.history.pushState({}, "", targetUrl.pathname);
+        locationHandler();
+    } else {
+        window.open(targetUrl.href, "_blank");
+    }
+};
+
+const locationHandler = async () => {
+    closeImageModalIfOpen();
+    let location = window.location.pathname;
+    if (location.length === 0) location = "/";
+
+    if (location.startsWith("/catalog/")) {
+        const brand = location.split("/")[2];
+
+        const response = await fetch('../csv/catalog.csv');
+        const data = await response.text();
+        const rows = data.trim().split('\n');
+        const headers = rows.shift().split(',').map(h => h.trim());
+        const items = rows.map(row => {
+            const values = row.split(',');
+            return headers.reduce((obj, header, i) => {
+                obj[header] = values[i];
+                return obj;
+            }, {});
+        });
+
+        const brandsSet = new Set(items.map(item => item.Brand.trim().toLowerCase()));
+
+        if (!brandsSet.has(brand.trim().toLowerCase())) {
+            window.history.replaceState({}, "", "/");
+            location = "/";
+        }
+        else {
+            const html = await fetch("../pages/component/products.html").then((res) => res.text());
+            document.getElementById("main-content").innerHTML = html;
+
+            await initBrandCatalog(brand);
+
+            const subtitleEl = document.getElementById("catalog_page_subtitle");
+            if (subtitleEl) {
+                subtitleEl.style.display = "none";
+            }
+
+            const brandTitleEl = document.getElementById("catalog_brand_title");
+            if (brandTitleEl) {
+                const formattedBrand = brand
+                    .replace(/_/g, ' ')
+                    .replace(/^./, char => char.toUpperCase());
+                brandTitleEl.textContent = `${formattedBrand}`;
+            }
+
+            setTimeout(() => window.scrollTo({ top: 0 }), 0);
+            return;
+        }
+    }
+
+    let route = routes[location] || routes["404"];
+    if (route.title === "404") {
+        window.history.pushState({}, "", "/");
+        location = "/";
+        route = routes[location];
+    }
+
+    const html = await fetch(route.template).then((response) => response.text());
+    document.getElementById('main-content').innerHTML = html;
+
+    await changeActive(location);
+    applyTranslations(currentLang);
+    setTimeout(() => window.scrollTo({ top: 0 }), 0);
+};
+
+
+async function changeActive(location) {
+    document.getElementById('budget-section').style.display = (location !== "/contact") ? '' : 'none';
+    document.querySelectorAll('nav .nav-link').forEach(el => el.classList.remove('active'));
+    switch (location) {
+        case "404":
+        case "/":
+            document.getElementById("nav_mainpage").classList.add('active');
+            break;
+        case "/catalog":
+            document.getElementById("nav_catalog").classList.add('active');
+            break;
+        case "/services":
+            document.getElementById("nav_services").classList.add('active');
+            break;
+        case "/contact":
+            document.getElementById("nav_contact").classList.add('active');
+            initContactForm();
+            break;
+        case "/aboutus":
+            document.getElementById("nav_aboutus").classList.add('active');
+            break;
+        case "/kitchens":
+            document.getElementById("nav_services").classList.add('active');
+            await loadServiceGallery("kitchens");
+            break;
+        case "/bathrooms":
+            document.getElementById("nav_services").classList.add('active');
+            await loadServiceGallery("bathrooms");
+            break;
+        case "/funeral-art":
+            document.getElementById("nav_services").classList.add('active');
+            await loadServiceGallery("funeral-art");
+            break;
+        case "/miscellaneous":
+            document.getElementById("nav_services").classList.add('active');
+            await loadServiceGallery("miscellaneous");
+            break;
+        case "/privacy-policy":
+            break;
+    }
+}
+
+function goToRoute(route) {
+    window.history.pushState({}, "", route);
+    locationHandler();
+}
+
+function goToBrandCatalog(brand) {
+    window.history.pushState({}, "", `/catalog/${brand}`);
+    locationHandler();
+}
+
+window.onpopstate = locationHandler;
+window.route = route;
+locationHandler();

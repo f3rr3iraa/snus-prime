@@ -52,6 +52,28 @@ const locationHandler = async () => {
     let location = window.location.pathname;
     if (location.length === 0) location = "/";
 
+    if (location.startsWith("/detalhes/")) {
+        await loadProducts();
+        const productSlug = decodeURIComponent(location.split("/")[2]);
+        const product = products.find(
+            (p) => slugify(p.photoPath) === productSlug
+        );
+
+        if (!product) {
+            window.history.pushState({}, "", "/");
+            return locationHandler();
+        }
+
+        const html = await fetch(routes["/detalhes"].template).then((res) => res.text());
+        document.getElementById("content").innerHTML = html;
+
+        await renderDetailsProducts(product);
+
+        await changeActive("/detalhes")
+        setTimeout(() => window.scrollTo({ top: 0 }), 0);
+        return;
+    }
+
     let route = routes[location] || routes["404"];
     if (route.title === "404") {
         window.history.pushState({}, "", "/");
@@ -81,9 +103,26 @@ async function changeActive(location) {
         case "/contactos":
             document.getElementById('form-contacto').classList.add('d-none')
             break;
+        case "/":
+            await renderProductsCarousel();
+            break
+        case "/carrinho":
+            await renderCart();
+            break
+        case "/detalhes":
+            await renderOtherProducts();
+            break
         default:
     }
 
+}
+
+function slugify(name) {
+    return name
+        .toLowerCase()
+        .trim()
+        .replace(/\s+/g, "-")
+        .replace(/[^\w\-]+/g, "");
 }
 
 function goToRoute(route) {
@@ -91,7 +130,12 @@ function goToRoute(route) {
     locationHandler();
 }
 
-// update ano footer
+function goToProduct(productName) {
+    const slug = slugify(productName);
+    window.history.pushState({}, "", `/detalhes/${slug}`);
+    locationHandler();
+}
+
 document.getElementById('current-year').textContent = new Date().getFullYear();
 
 window.onpopstate = locationHandler;
