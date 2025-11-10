@@ -222,38 +222,46 @@ async function renderProducts(filteredProducts = products) {
 }
 
 async function insertProductInfo(newProduct, element) {
-    const productBadge = newProduct.querySelector("#product-badge")
-    const productImage = newProduct.querySelector("#product-image")
-    const productBrand = newProduct.querySelector("#product-brand")
-    const productName = newProduct.querySelector("#product-name-nicotine")
-    const productPrice = newProduct.querySelector("#product-price")
-    const productOldPrice = newProduct.querySelector("#product-old-promo-price")
-    const productAddBtn = newProduct.querySelector("#product-add")
-    const productDetailsBtn = newProduct.querySelector("#product-details")
+    const productImage = newProduct.querySelector("#product-image");
+    const productBadge = newProduct.querySelector("#product-badge");
+    const productBrand = newProduct.querySelector("#product-brand");
+    const productName = newProduct.querySelector("#product-name-nicotine");
+    const productPrice = newProduct.querySelector("#product-price");
+    const productOldPrice = newProduct.querySelector("#product-old-promo-price");
+    const productAddBtn = newProduct.querySelector("#product-add");
+    const productDetailsBtn = newProduct.querySelector("#product-details");
 
-    productImage.src = `/data/img/${element.photoPath}.jpg`
-    productBrand.textContent = element.brand
-    productName.textContent = `${element.name} | ${element.nicotine_mg} Mg`
-    productPrice.textContent = `${element.price}€`
-    if (newProducts.includes(element.name)) {
-        productBadge.textContent = "Novidade"
-        productBadge.classList.add("novidade-inf")
+    const basePath = `/data/img/${element.photoPath}`;
+    const extensions = [".webp", ".jpg", ".jpeg", ".png"];
+    let index = 0;
+
+    function tryNext() {
+        if (index < extensions.length) {
+            productImage.src = `${basePath}${extensions[index++]}`;
+        } else {
+            productImage.src = "/assets/images/snus-prime-fallback.jpg";
+        }
     }
+
+    productImage.onerror = tryNext;
+    tryNext();
+
+    productBrand.textContent = element.brand;
+    productName.textContent = `${element.name} | ${element.nicotine_mg} Mg`;
+    productPrice.textContent = `${element.price}€`;
+
+    if (newProducts.includes(element.name)) {
+        productBadge.textContent = "Novidade";
+        productBadge.classList.add("novidade-inf");
+    }
+
     if (element.promotion != 0) {
-        productBadge.textContent = "Promoção"
-        productBadge.classList.add("promotion-inf")
-        productOldPrice.textContent = `${element.oldPrice}€`
+        productBadge.textContent = "Promoção";
+        productBadge.classList.add("promotion-inf");
+        productOldPrice.textContent = `${element.oldPrice}€`;
     }
 
     productAddBtn.setAttribute("data-id", element.name);
     productDetailsBtn.setAttribute("data-id", element.photoPath);
 }
 
-function addToCart(productName) {
-    const product = products.find(p => productName.includes(p.name));
-    if (!product) return;
-
-    const existingItem = cart.find(item => item.name === product.name);
-
-    existingItem ? existingItem.qt += 1 : cart.push({ ...product, qt: 1 });
-}

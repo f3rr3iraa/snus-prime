@@ -411,3 +411,47 @@ input[type="range"].custom-range::-moz-range-thumb {
 input[type="range"].custom-range::-moz-range-thumb:active {
   box-shadow: 0 3px 20px rgba(0, 0, 0, 0.5);
 }
+
+
+
+
+/* para as "..." do nome do produto em mobile*/
+@media (max-width: 576px) {
+  #product-name-nicotine {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: block;
+  }
+}
+
+
+
+
+
+
+
+
+.btn-filter {
+  background: linear-gradient(135deg, #8c45f7, #a56dfc);
+  border: none;
+  color: #ffffff;
+  font-weight: 600;
+  padding: 14px 32px; 
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.35);
+  transition: all 0.3s ease;
+  margin-right: 8px;
+}
+
+
+
+.navbar-toggler:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+
+.btn-close:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}

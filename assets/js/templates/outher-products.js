@@ -30,7 +30,20 @@ async function insertOtherProductInfo(NewOtherProduct, element, i) {
     const carouselProductPrice= NewOtherProduct.querySelector("#other-product-price")
     const carouselProductOldPrice = NewOtherProduct.querySelector("#other-product-old-promo-price")
 
-    carouselProductImage.src = `/data/img/${element.photoPath}.jpg`
+    const basePath = `/data/img/${element.photoPath}`;
+    const extensions = [".webp", ".jpg", ".jpeg", ".png"];
+    let index = 0;
+
+    function tryNext() {
+        if (index < extensions.length) {
+            carouselProductImage.src = `${basePath}${extensions[index++]}`;
+        } else {
+            carouselProductImage.src = "/assets/images/snus-prime-fallback.jpg";
+        }
+    }
+
+    carouselProductImage.onerror = tryNext;
+    tryNext();
     carouselProductBrand.textContent = element.brand
     carouselProductName.textContent = `${element.name} | ${element.nicotine_mg} Mg`
     carouselProductPrice.textContent = `${element.price}€`

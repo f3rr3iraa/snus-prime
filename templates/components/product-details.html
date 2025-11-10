@@ -1,37 +1,47 @@
-<div class="container justify-content-center align-items-center d-flex">
 
-    <div class="col-5 d-flex position-relative">
-        <span id="details-product-badge" class="badge position-absolute top-0 start-0 m-2 text-white fs-6"></span>
-        <img id="details-product-image" class="img-fluid">
-    </div>
-    
-    <div class="col-5">
-        <h2 id="details-product-brand"></h2>
-        <hr>
+<div class="container py-md-4 py-0">
+    <div class="row justify-content-center align-items-center">
+
+        <!-- Imagem do produto -->
+        <div class="col-12 col-md-5 d-flex position-relative mb-4 mb-md-0">
+            <span id="details-product-badge" class="badge position-absolute top-0 start-0 m-2 text-white fs-6"></span>
+            <img id="details-product-image" class="img-fluid w-100 rounded" alt="Imagem do produto">
+        </div>
         
-        <div class="d-flex align-items-center mb-4 ml-3">
-            <h4 id="details-product-price" class="mb-0"></h4>
-            <span id="details-product-old-promo-price" class="text-decoration-line-through text-muted ms-2"></span>
+        <!-- Detalhes do produto -->
+        <div class="col-12 col-md-5">
+            <h2 id="details-product-brand" class="fw-bold mb-3"></h2>
+
+            <!-- Preços -->
+            <div class="d-flex flex-wrap align-items-center mb-4">
+                <h4 id="details-product-price" class="mb-0 me-2"></h4>
+                <span id="details-product-old-promo-price" class="text-decoration-line-through text-muted"></span>
+            </div>
+
+            <!-- Quantidade -->
+            <h5 class="mb-3">Quantidade</h5>
+            <div class="d-flex flex-wrap gap-2">
+                <span class="border border-dark p-3 flex-fill text-center">1 stuk 4,99€ p/s</span>
+                <span class="border border-dark p-3 flex-fill text-center">5 stuk 24,95€ p/s</span>
+                <span class="border border-dark p-3 flex-fill text-center">Nova Quantidade</span>
+            </div>
+
+            <!-- Botão -->
+            <button class="mt-4 btn-buy w-100 btn-lg mb-4">Adicionar ao Carrinho</button>
+
+            <!-- Informação -->
+            <div class="mb-3">
+                <h5 class="mb-2">Informação do Produto</h5>
+                <p id="details-product-flavor" class="mb-1"></p>
+                <p id="details-product-power" class="mb-1"></p>
+                <p id="details-product-nicotine-mg" class="mb-1"></p>
+                <p id="details-product-size" class="mb-2"></p>
+            </div>
+
+            <!-- Descrição -->
+            <h5>Descrição</h5>
+            <p id="details-product-description"></p>
         </div>
 
-        
-        <h5 class="mb-4">Quantidade</h5>
-        <div class="d-flex gap-2">
-            <span class="border border-dark p-3">1 stuk 4,99€ p/s </span>
-            <span class="border border-dark p-3">5 stuk 24,95€ p/s </span>
-            <span class="border border-dark p-3">Nova Quantidade</span>
-        </div>
-        <button class="mt-5 btn-buy">Adicionar ao Carrinho</button>
-        <hr>
-        <div class="mb-3">
-            <h5 class="mb-2">Informação do Produto</h5>
-            <p id="details-product-flavor" class="mb-1"></p>
-            <p id="details-product-power" class="mb-1"></p>
-            <p id="details-product-nicotine-mg" class="mb-1"></p>
-            <p id="details-product-size" class="mb-2"></p>
-        </div>
-        
-        <h5>Descrição</h5>
-        <p id="details-product-description"></p>
     </div>
 </div>

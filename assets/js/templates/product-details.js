@@ -30,7 +30,21 @@ async function insertDetailsProductInfo(NewDetailsProduct, product) {
 
     const breadcrumbActive = document.querySelector(".breadcrumb-item.active");
 
-    detailsProductImage.src = `/data/img/${product.photoPath}.jpg`
+    const basePath = `/data/img/${product.photoPath}`;
+    const extensions = [".webp", ".jpg", ".jpeg", ".png"];
+    let index = 0;
+
+    function tryNext() {
+        if (index < extensions.length) {
+            detailsProductImage.src = `${basePath}${extensions[index++]}`;
+        } else {
+            detailsProductImage.src = "/assets/images/snus-prime-fallback.jpg";
+        }
+    }
+
+    detailsProductImage.onerror = tryNext;
+    tryNext();
+
     detailsProductBrand.textContent = `${product.brand} ${product.name}`
     detailsProductPrice.textContent = `Preço: ${product.price}€`
     detailsProductFlavor.textContent = `Sabor: ${product.flavor}`

@@ -29,11 +29,30 @@ async function insertCarouselProductInfo(NewCarouselProduct, element, i) {
     const carouselProductImage= NewCarouselProduct.querySelector("#product-image")
     const carouselProductName = NewCarouselProduct.querySelector("#product-title")
     const carouselProductDescription= NewCarouselProduct.querySelector("#product-description")
+    const carouselAddBtn = NewCarouselProduct.querySelector("#product-add")
+    const carouselDetailsBtn = NewCarouselProduct.querySelector("#product-details")
 
-    carouselProductImage.src = `/data/img/${element.photoPath}.jpg`
+    const basePath = `/data/img/${element.photoPath}`;
+    const extensions = [".webp", ".jpg", ".jpeg", ".png"];
+    let index = 0;
+
+    function tryNext() {
+        if (index < extensions.length) {
+            carouselProductImage.src = `${basePath}${extensions[index++]}`;
+        } else {
+            carouselProductImage.src = "/assets/images/snus-prime-fallback.jpg";
+        }
+    }
+
+    carouselProductImage.onerror = tryNext;
+    tryNext();
+
     carouselProductName.textContent = element.name
     carouselProductDescription.textContent = element.description
 
     if (i == 0)
         carouselItem.classList.add("active");
+
+    carouselAddBtn.setAttribute("data-id", element.name);
+    carouselDetailsBtn.setAttribute("data-id", element.photoPath);
 }
