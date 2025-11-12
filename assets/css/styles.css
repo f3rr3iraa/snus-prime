@@ -466,3 +466,25 @@ input[type="range"].custom-range::-moz-range-thumb:active {
   outline: none !important;
   box-shadow: none !important;
 }
+
+
+.sort-btn {
+    background: none;
+    border: none;
+    color: black;
+    font-weight: 500;
+    cursor: pointer;
+    transition: color 0.2s ease;
+    text-decoration: none;
+    padding: 0;
+}
+
+.sort-btn:hover {
+    color: #bfbfbf;
+}
+
+.sort-btn.active {
+    text-decoration: underline;
+    font-weight: 600;
+    color: #bfbfbf;
+}
