@@ -34,6 +34,11 @@ const routes = {
         title: "details",
         description: "Details Page",
     },
+    "/politica-privacidade": {
+        template: "/templates/privacy-policy.html",
+        title: "privacy-policy",
+        description: "Privacy Policy Page",
+    },
 }
 
 const route = (event) => {

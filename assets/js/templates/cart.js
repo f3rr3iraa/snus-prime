@@ -73,8 +73,8 @@ async function insertCartProductInfo(newCartProduct, element) {
     cartProductQt.value = element.qt;
     cartProductTotalPrice.textContent = `${(element.price * element.qt).toFixed(2)}€`;
 
-    const btnAdd = newCartProduct.querySelector(".btn-secondary");
-    const btnReduce = newCartProduct.querySelector(".btn-primary");
+    const btnAdd = newCartProduct.querySelector("#btnAdd");
+    const btnReduce = newCartProduct.querySelector("#btnReduce");
     const btnRemove = newCartProduct.querySelector(".btn.text-danger");
 
     // ✅ Disable minus button if quantity is 1

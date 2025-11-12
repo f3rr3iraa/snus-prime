@@ -6,25 +6,31 @@
 
 <!-- https://cdn.prod.website-files.com/605826c62e8de87de744596e/62331f2bb5a6d8a785593909_8AkqmmgGM4Y65j_NwNDXKtfvINDrPAO0Ro_GZMsHYwfrMkGKVBBXeq8uLjkpsonpNzFKkORaMnAQefsbTSAFRV-TRTAWPFWGEabmd_f6IoJeWMUu0qZ1Nq9TAR9NZsbP3oMaiLIy.png -->
 
-<div class="d-flex w-100">
+<div class="d-flex w-100 p-4">
   <!-- Cart Products -->
-  <div class="col-9 d-flex flex-column">
+  <div class="col-9 d-flex flex-column ">
     <!-- Header  -->
 
-    <div class="d-flex px-4 py-2">
-      <div class="col-6">
+    <div class="row">
+      <div class="col-5">
         <h4>Item</h4>
       </div>
-      <div class="col-2 d-flex align-items-center justify-content-center">
+      <div class="col-2 text-center">
         <h4>Preço</h4>
       </div>
-      <div class="col-2 d-flex align-items-center justify-content-center">
+      <div class="col-2 text-center">
         <h4>Quantidade</h4>
       </div>
-      <div class="col-2 d-flex align-items-center justify-content-center">
+      <div class="col-2 text-center">
         <h4>Total</h4>
       </div>
+      <div class="col-1 text-center">
+      </div>
     </div>
+
+
+    <hr class="mt-0 col-12 mx-auto d-block">
+
 
     <div id="cart-products-content">
 
@@ -35,12 +41,6 @@
   <div class="col-3  px-4 py-2">
     <h4>Sumário</h4>
     <h4>Subtotal: <span id="cart-subtotal">0.00€</span></h4>
-    <div class="form-check">
-      <input class="form-check-input" type="checkbox" value="" id="checkDefault">
-      <label class="form-check-label" for="checkDefault">
-        MBWAY
-      </label>
-    </div>
     <div class="form-check">
       <input class="form-check-input" type="checkbox" value="" id="checkChecked" checked>
       <label class="form-check-label" for="checkChecked">
@@ -59,7 +59,7 @@
         Em mão
       </label>
     </div>
-    <input class="form-control text-center" type="text"">
+    <input class="form-control text-center" type="text">
 
     <button type=" button" class="btn btn-dark">Confirmar</button>
   </div>

@@ -342,15 +342,16 @@ footer {
 }
 
 
+/* Details */
 
+.qt-btn-active {
+  border-color: #8c45f7 !important;
+}
 
-
-
-
-
-
-
-
+.qt-btn-inactive:hover {
+  border-color: #8c45f7 !important;
+  cursor: pointer;
+}
 
 
 
@@ -425,12 +426,22 @@ input[type="range"].custom-range::-moz-range-thumb:active {
   }
 }
 
+.btn-cart,
+.btn-cart:focus,
+.btn-cart:active,
+.btn-cart:focus-visible {
+  outline: none !important;
+  box-shadow: none !important;
+  border: none !important;
+}
 
+.txt-footer{
+  cursor: pointer;
+}
 
-
-
-
-
+.txt-footer:hover{
+  color: #bfbfbf !important;
+}
 
 .btn-filter {
   background: linear-gradient(135deg, #8c45f7, #a56dfc);

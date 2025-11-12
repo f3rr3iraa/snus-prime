@@ -21,9 +21,18 @@
             <!-- Quantidade -->
             <h5 class="mb-3">Quantidade</h5>
             <div class="d-flex flex-wrap gap-2">
-                <span class="border border-dark p-3 flex-fill text-center">1 stuk 4,99€ p/s</span>
-                <span class="border border-dark p-3 flex-fill text-center">5 stuk 24,95€ p/s</span>
-                <span class="border border-dark p-3 flex-fill text-center">Nova Quantidade</span>
+                <span class="border border-3 border-dark p-3 flex-fill text-center qt-btn-active" id="qt-1" onclick="changeQtWanted(1)"></span>
+                <span class="border border-3 border-dark p-3 flex-fill text-center qt-btn-inactive" id="qt-5" onclick="changeQtWanted(2)"></span>
+                <span class="border border-3 border-dark p-3 flex-fill text-center qt-btn-inactive" id="qt-other" onclick="changeQtWanted(3)">Outra Quantidade</span>
+            </div>
+
+            <div class="row mt-4 gx-2">
+                <div class="col-8">
+                    <input class="form-control text-center d-none" type="text" value="1" id="qt-other-value">
+                </div>
+                <div class="col-4">
+                    <input class="form-control text-center d-none" type="text" value="1" id="qt-other-value-price" disabled>
+                </div>
             </div>
 
             <!-- Botão -->

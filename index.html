@@ -14,7 +14,7 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
     crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
   <!-- Font Imports -->
   <!-- <link rel="stylesheet" href="" /> -->
   <!-- CSS -->
@@ -123,31 +123,32 @@
 
       <hr class="mx-auto col-10 col-md-11">
 
-      <div class="d-flex flex-column flex-md-row align-items-stretch justify-content-between text-center text-md-start text-md-left">
+      <div
+        class="d-flex flex-column flex-md-row align-items-stretch justify-content-between text-center text-md-start text-md-left">
         <div class="col-md-5 col-12 p-5 bg-white d-flex justify-content-center justify-content-md-start">
           <img src="/assets/images/snus-prime_logo.png" class="img-fluid w-50" alt="SNUS PRIME logo">
         </div>
 
-       <div class="col-md-4 col-12 p-4">
-  <h3>Contactos</h3>
+        <div class="col-md-4 col-12 p-4">
+          <h3>Contactos</h3>
 
-  <a class="fs-6 d-block contact-link" href="tel:+351968509488">T: +351 968 509 488</a>
-  <a class="fs-6 d-block contact-link" href="tel:+351938779896">T: +351 938 779 896</a>
-  <a class="fs-6 d-block contact-link" href="tel:+351913248028">T: +351 913 248 028</a>
-  <a id="email-link" class="fs-6 d-block contact-link">snusprimestore@gmail.com</a>
+          <a class="fs-6 d-block contact-link" href="tel:+351968509488">T: +351 968 509 488</a>
+          <a class="fs-6 d-block contact-link" href="tel:+351938779896">T: +351 938 779 896</a>
+          <a class="fs-6 d-block contact-link" href="tel:+351913248028">T: +351 913 248 028</a>
+          <a id="email-link" class="fs-6 d-block contact-link">snusprimestore@gmail.com</a>
 
-  <script>
-    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-    const link = document.getElementById("email-link");
+          <script>
+            const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+            const link = document.getElementById("email-link");
 
-    if (isMobile) {
-      link.href = "mailto:snusprimestore@gmail.com";
-    } else {
-      link.href = "https://mail.google.com/mail/?view=cm&fs=1&to=snusprimestore@gmail.com";
-      link.target = "_blank";
-    }
-  </script>
-</div>
+            if (isMobile) {
+              link.href = "mailto:snusprimestore@gmail.com";
+            } else {
+              link.href = "https://mail.google.com/mail/?view=cm&fs=1&to=snusprimestore@gmail.com";
+              link.target = "_blank";
+            }
+          </script>
+        </div>
 
 
         <div class="col-md-3 col-12 p-4">
@@ -162,8 +163,12 @@
     </div>
 
     <div class="text-center">
-      <a href="#" class="text-dark me-3 text-decoration-none">Política de Privacidade</a>
-      <a href="https://www.livroreclamacoes.pt/Inicio/" target="_blank" class="text-dark text-decoration-none">Livro de Reclamações</a>
+      <a onclick="goToRoute('/politica-privacidade')" class="txt-footer text-dark me-3 text-decoration-none">
+  Política de Privacidade
+</a>
+
+      <a href="https://www.livroreclamacoes.pt/Inicio/" target="_blank" class="txt-footer  text-dark text-decoration-none">Livro de
+        Reclamações</a>
       <p class="mb-1">&copy; <span id="current-year"></span> SNUS PRIME</p>
     </div>
   </footer>
@@ -171,22 +176,23 @@
 
 
 
-<script>
+  <script>
     !function (t, e, c, n) {
-        var s = e.createElement(c);
-        s.async = 1, s.src = 'https://scripts.claspo.io/scripts/' + n + '.js';
-        var r = e.scripts[0];
-        r.parentNode.insertBefore(s, r);
-        var f = function () {
-            f.c(arguments);
-        };
-        f.q = [];
-        f.c = function () {
-            f.q.push(arguments);
-        };
-        t['claspo'] = t['claspo'] || f;
+      var s = e.createElement(c);
+      s.async = 1, s.src = 'https://scripts.claspo.io/scripts/' + n + '.js';
+      var r = e.scripts[0];
+      r.parentNode.insertBefore(s, r);
+      var f = function () {
+        f.c(arguments);
+      };
+      f.q = [];
+      f.c = function () {
+        f.q.push(arguments);
+      };
+      t['claspo'] = t['claspo'] || f;
     }(window, document, 'script', 'B5A6533BEDBA4D7D877021D15722CBA9');
-</script><script>claspo('init');</script>
+  </script>
+  <script>claspo('init');</script>
 
 
 

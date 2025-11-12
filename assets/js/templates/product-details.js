@@ -27,6 +27,8 @@ async function insertDetailsProductInfo(NewDetailsProduct, product) {
     const detailsProductNicotineMg = NewDetailsProduct.querySelector("#details-product-nicotine-mg")
     const detailsProductSize = NewDetailsProduct.querySelector("#details-product-size")
     const detailsProductDescription = NewDetailsProduct.querySelector("#details-product-description")
+    const detailsQt1 = NewDetailsProduct.querySelector("#qt-1")
+    const detailsQt5 = NewDetailsProduct.querySelector("#qt-5")
 
     const breadcrumbActive = document.querySelector(".breadcrumb-item.active");
 
@@ -60,5 +62,57 @@ async function insertDetailsProductInfo(NewDetailsProduct, product) {
 
     if (breadcrumbActive) {
         breadcrumbActive.textContent = `${product.brand} ${product.name}`;
+    }
+
+    detailsQt1.textContent = `x1 Snus | ${Number(product.price).toFixed(2)}€`
+    detailsQt5.textContent = `x5 Snus | ${Number(product.price * 5).toFixed(2)}€`
+}
+
+function activateQtBtn(element) {
+	element.classList.remove("qt-btn-inactive");
+	element.classList.add("qt-btn-active");
+}
+
+function disableQtBtn(element) {
+	element.classList.remove("qt-btn-active");
+	element.classList.add("qt-btn-inactive");
+}
+
+function changeQtWanted(flag) {
+    const quantityElements = [
+        document.getElementById("qt-1"),
+        document.getElementById("qt-5"),
+        document.getElementById("qt-other")
+    ]
+    const qtOtherValue = document.getElementById("qt-other-value")
+    const qtOtherValuePrice = document.getElementById("qt-other-value-price")
+    switch (flag) {
+        case 1:
+            quantityElements.forEach((element) => {
+                element.id == "qt-1"
+                    ? activateQtBtn(element)
+                    : disableQtBtn(element)
+            })
+            qtOtherValue.classList.add("d-none")
+            qtOtherValuePrice.classList.add("d-none")
+            break;
+        case 2:
+            quantityElements.forEach((element) => {
+                element.id == "qt-5"
+                    ? activateQtBtn(element)
+                    : disableQtBtn(element)
+            })
+            qtOtherValue.classList.add("d-none")
+            qtOtherValuePrice.classList.add("d-none")
+            break;
+        case 3:
+            quantityElements.forEach((element) => {
+                element.id == "qt-other"
+                    ? activateQtBtn(element)
+                    : disableQtBtn(element)
+            })
+            qtOtherValue.classList.remove("d-none")
+            qtOtherValuePrice.classList.remove("d-none")
+            break;
     }
 }
