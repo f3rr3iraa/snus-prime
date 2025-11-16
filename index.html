@@ -1,207 +1,349 @@
 <!DOCTYPE html>
 <html lang="pt">
+  <head>
+    <!-- Required Meta Tags -->
+    <title>SNUS PRIME</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="icon"
+      href="https://jsousaecoelho.com/image/global/logo_icon_.png"
+      type="image/x-icon"
+    />
+    <!-- Bootstrap Imports -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+    <!-- Font Imports -->
+    <!-- <link rel="stylesheet" href="" /> -->
+    <!-- CSS -->
+    <link rel="stylesheet" href="/assets/css/styles.css" />
+    <!-- JS -->
+    <script type="text/javascript" src="/assets/js/Classes.js"></script>
+    <script type="text/javascript" src="/assets/js/index.js"></script>
+    <script type="text/javascript" src="/assets/js/templates/home.js"></script>
+    <script
+      type="text/javascript"
+      src="/assets/js/templates/catalog.js"
+    ></script>
+    <script type="text/javascript" src="/assets/js/templates/cart.js"></script>
+    <script
+      type="text/javascript"
+      src="/assets/js/templates/item-page.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="/assets/js/templates/form-contacts.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="/assets/js/templates/outher-products.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="/assets/js/templates/product-details.js"
+    ></script>
 
-<head>
-  <!-- Required Meta Tags -->
-  <title>SNUS PRIME</title>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel="icon" href="https://jsousaecoelho.com/image/global/logo_icon_.png" type="image/x-icon">
-  <!-- Bootstrap Imports -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet" />
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
-    crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
-  <!-- Font Imports -->
-  <!-- <link rel="stylesheet" href="" /> -->
-  <!-- CSS -->
-  <link rel="stylesheet" href="/assets/css/styles.css" />
-  <!-- JS -->
-  <script type="text/javascript" src="/assets/js/Classes.js"></script>
-  <script type="text/javascript" src="/assets/js/index.js"></script>
-  <script type="text/javascript" src="/assets/js/templates/home.js"></script>
-  <script type="text/javascript" src="/assets/js/templates/catalog.js"></script>
-  <script type="text/javascript" src="/assets/js/templates/cart.js"></script>
-  <script type="text/javascript" src="/assets/js/templates/item-page.js"></script>
-  <script type="text/javascript" src="/assets/js/templates/form-contacts.js"></script>
-  <script type="text/javascript" src="/assets/js/templates/outher-products.js"></script>
-  <script type="text/javascript" src="/assets/js/templates/product-details.js"></script>
+    <script type="text/javascript" src="/assets/js/range.js"></script>
+  </head>
 
-  <script type="text/javascript" src="/assets/js/range.js"></script>
+  <body>
+    <!-- Topbar -->
+    <nav class="navbar navbar-expand-lg fixed-top background-navbar py-2">
+      <div class="container-fluid ps-5">
+        <!-- logo -->
+        <div class="col-3 d-flex justify-content-center align-items-center">
+          <a class="navbar-brand nav-link" onclick="goToRoute('/')">
+            <img
+              src="/assets/images/snus-prime_logo.png"
+              alt="Logo"
+              class="navbar-logo"
+            />
+          </a>
+        </div>
 
+        <!-- rotas -->
+        <div
+          class="col-6 d-none d-lg-flex justify-content-center align-items-center"
+        >
+          <ul class="navbar-nav gap-3">
+            <li class="nav-item">
+              <a class="nav-link text-dark px-2" onclick="goToRoute('/')"
+                >Início</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link text-dark px-2"
+                onclick="goToRoute('/produtos')"
+                >Produtos</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-dark px-2" onclick="goToRoute('/sobre')"
+                >Sobre Nós</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link text-dark px-2"
+                onclick="goToRoute('/contactos')"
+                >Contactos</a
+              >
+            </li>
+          </ul>
+        </div>
 
-</head>
+        <!-- icon da shop -->
+        <!-- icon da shop -->
+        <div
+          class="col-3 d-none d-lg-flex justify-content-center align-items-center"
+        >
+          <div
+            style="position: relative; cursor: pointer"
+            onclick="goToRoute('/carrinho')"
+          >
+            <img
+              src="../assets/icons/shop.png"
+              class="icon nav-link"
+              style="height: 26px; width: 26px"
+              onmouseover="this.src='../assets/icons/shop_hover.png'"
+              onmouseout="this.src='../assets/icons/shop.png'"
+            />
 
-<body>
-  <!-- Topbar -->
-  <nav class="navbar navbar-expand-lg fixed-top background-navbar py-2">
-    <div class="container-fluid ps-5">
-      <!-- logo -->
-      <div class="col-3 d-flex justify-content-center align-items-center">
-        <a class="navbar-brand nav-link" onclick="goToRoute('/')">
-          <img src="/assets/images/snus-prime_logo.png" alt="Logo" class="navbar-logo">
-        </a>
+            <span
+              id="cart-badge"
+              style="
+                position: absolute;
+                top: -8px;
+                right: -12px;
+                background: #7a35e8;
+                color: white;
+                border-radius: 50%;
+                padding: 1px 6px;
+                font-size: 11px;
+                display: none;
+              "
+            >
+              0
+            </span>
+          </div>
+        </div>
+
+        <!-- 3 linhas mobile -->
+        <div class="d-flex justify-content-between align-items-center">
+          <button
+            class="navbar-toggler border-0 d-lg-none"
+            type="button"
+            data-bs-toggle="offcanvas"
+            data-bs-target="#mobileMenu"
+            aria-controls="mobileMenu"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        </div>
       </div>
+    </nav>
 
-      <!-- rotas -->
-      <div class="col-6 d-none d-lg-flex justify-content-center align-items-center">
-        <ul class="navbar-nav gap-3">
-          <li class="nav-item"><a class="nav-link text-dark px-2" onclick="goToRoute('/')">Início</a></li>
-          <li class="nav-item"><a class="nav-link text-dark px-2" onclick="goToRoute('/produtos')">Produtos</a></li>
-          <li class="nav-item"><a class="nav-link text-dark px-2" onclick="goToRoute('/sobre')">Sobre Nós</a></li>
-          <li class="nav-item"><a class="nav-link text-dark px-2" onclick="goToRoute('/contactos')">Contactos</a></li>
-        </ul>
-      </div>
-
-      <!-- icon da shop -->
-      <div class="col-3 d-none d-lg-flex justify-content-center align-items-center">
-        <img src="../assets/icons/shop.png" class="icon nav-link" style="height: 26px; width: 26px;"
-          onclick="goToRoute('/carrinho')" onmouseover="this.src='../assets/icons/shop_hover.png'"
-          onmouseout="this.src='../assets/icons/shop.png'">
-      </div>
-
-      <!-- 3 linhas mobile -->
-      <div class="d-flex justify-content-between align-items-center">
-        <button class="navbar-toggler border-0 d-lg-none" type="button" data-bs-toggle="offcanvas"
-          data-bs-target="#mobileMenu" aria-controls="mobileMenu">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-      </div>
-
-    </div>
-  </nav>
-
-  <!-- sidebar mobile  -->
-  <div class="offcanvas offcanvas-end w-75" tabindex="-1" id="mobileMenu" aria-labelledby="mobileMenuLabel">
-    <div class="offcanvas-header border-bottom">
-      <a class="navbar-brand" onclick="goToRoute('/')">
-        <img src="/assets/images/snus-prime_logo.png" alt="Logo" class="navbar-logo" style="height: 40px;">
-      </a>
-      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Fechar"></button>
-    </div>
-    <div class="offcanvas-body d-flex flex-column align-items-start">
-      <a class="nav-link text-dark py-2" onclick="goToRoute('/')">Início</a>
-      <a class="nav-link text-dark py-2" onclick="goToRoute('/produtos')">Produtos</a>
-      <a class="nav-link text-dark py-2" onclick="goToRoute('/sobre')">Sobre Nós</a>
-      <a class="nav-link text-dark py-2" onclick="goToRoute('/contactos')">Contactos</a>
-      <hr class="w-100">
-      <div class="mt-auto w-100">
-        <a class="nav-link d-flex align-items-center py-2" onclick="goToRoute('/carrinho')">
-          <img src="../assets/icons/shop.png" style="height: 24px; width: 24px;" class="me-2"> Carrinho
-        </a>
-      </div>
-    </div>
-  </div>
-
-
-  <!-- Content -->
-  <div id="content"></div>
-
-
-
-  <!-- contacto -->
-  <div id="form-contacto" class="d-flex flex-column flex-md-row align-items-center justify-content-center mt-5 mb-5">
-
+    <!-- sidebar mobile  -->
     <div
-      class="col-md-4 col-10 d-flex align-items-center justify-content-between justify-content-md-center mb-3 mb-md-0">
-      <h3>Tem alguma dúvida, queres um novo snus? Entre em contacto connosco!</h3>
-    </div>
-
-    <div class="col-md-5 col-10 d-flex align-items-center justify-content-end justify-content-md-center">
-      <button class="btn-contact p-3" onclick="goToRoute('/contactos')">Entre em contacto</button>
-    </div>
-
-  </div>
-
-
-  <!-- footer -->
-  <footer class="text-dark py-3 container-footer mt-5">
-    <div class="container justify-content-center align-items-center mt-4 text-center">
-
-      <hr class="mx-auto col-10 col-md-11">
-
-      <div
-        class="d-flex flex-column flex-md-row align-items-stretch justify-content-between text-center text-md-start text-md-left">
-        <div class="col-md-5 col-12 p-5 bg-white d-flex justify-content-center justify-content-md-start">
-          <img src="/assets/images/snus-prime_logo.png" class="img-fluid" style="width: 50%; min-width: 200px;"
-            alt="SNUS PRIME logo">
-
-        </div>
-
-        <div class="col-md-4 col-12 p-4">
-          <h3>Contactos</h3>
-
-          <a class="fs-6 d-block contact-link" href="tel:+351968509488">T: +351 968 509 488</a>
-          <a class="fs-6 d-block contact-link" href="tel:+351938779896">T: +351 938 779 896</a>
-          <a class="fs-6 d-block contact-link" href="tel:+351913248028">T: +351 913 248 028</a>
-          <a id="email-link" class="fs-6 d-block contact-link">snusprimestore@gmail.com</a>
-
-          <script>
-            const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-            const link = document.getElementById("email-link");
-
-            if (isMobile) {
-              link.href = "mailto:snusprimestore@gmail.com";
-            } else {
-              link.href = "https://mail.google.com/mail/?view=cm&fs=1&to=snusprimestore@gmail.com";
-              link.target = "_blank";
-            }
-          </script>
-        </div>
-
-
-        <div class="col-md-3 col-12 p-4">
-          <h3>Siga-nos</h3>
-          <a href="https://www.instagram.com/snusprime_store/" target="_blank">
-            <img src="/assets/icons/instagram.png" class="icon-footer nav-link mx-auto mx-md-0 d-block" alt="Instagram">
+      class="offcanvas offcanvas-end w-75"
+      tabindex="-1"
+      id="mobileMenu"
+      aria-labelledby="mobileMenuLabel"
+    >
+      <div class="offcanvas-header border-bottom">
+        <a class="navbar-brand" onclick="goToRoute('/')">
+          <img
+            src="/assets/images/snus-prime_logo.png"
+            alt="Logo"
+            class="navbar-logo"
+            style="height: 40px"
+          />
+        </a>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="offcanvas"
+          aria-label="Fechar"
+        ></button>
+      </div>
+      <div class="offcanvas-body d-flex flex-column align-items-start">
+        <a class="nav-link text-dark py-2" onclick="goToRoute('/')">Início</a>
+        <a class="nav-link text-dark py-2" onclick="goToRoute('/produtos')"
+          >Produtos</a
+        >
+        <a class="nav-link text-dark py-2" onclick="goToRoute('/sobre')"
+          >Sobre Nós</a
+        >
+        <a class="nav-link text-dark py-2" onclick="goToRoute('/contactos')"
+          >Contactos</a
+        >
+        <hr class="w-100" />
+        <div class="mt-auto w-100">
+          <a
+            class="nav-link d-flex align-items-center py-2"
+            onclick="goToRoute('/carrinho')"
+          >
+            <img
+              src="../assets/icons/shop.png"
+              style="height: 24px; width: 24px"
+              class="me-2"
+            />
+            Carrinho
           </a>
         </div>
       </div>
-
-      <hr class="mx-auto col-10 col-md-11">
     </div>
 
-    <div class="text-center">
-      <a onclick="goToRoute('/politica-privacidade')" class="txt-footer text-dark me-3 text-decoration-none">
-        Política de Privacidade
-      </a>
+    <!-- Content -->
+    <div id="content"></div>
 
-      <a href="https://www.livroreclamacoes.pt/Inicio/" target="_blank"
-        class="txt-footer  text-dark text-decoration-none">Livro de
-        Reclamações</a>
-      <p class="mb-1">&copy; <span id="current-year"></span> SNUS PRIME</p>
+    <!-- contacto -->
+    <div
+      id="form-contacto"
+      class="d-flex flex-column flex-md-row align-items-center justify-content-center mt-5 mb-5"
+    >
+      <div
+        class="col-md-4 col-10 d-flex align-items-center justify-content-between justify-content-md-center mb-3 mb-md-0"
+      >
+        <h3>
+          Tem alguma dúvida, queres um novo snus? Entre em contacto connosco!
+        </h3>
+      </div>
+
+      <div
+        class="col-md-5 col-10 d-flex align-items-center justify-content-end justify-content-md-center"
+      >
+        <button class="btn-contact p-3" onclick="goToRoute('/contactos')">
+          Entre em contacto
+        </button>
+      </div>
     </div>
-  </footer>
 
+    <!-- footer -->
+    <footer class="text-dark py-3 container-footer mt-5">
+      <div
+        class="container justify-content-center align-items-center mt-4 text-center"
+      >
+        <hr class="mx-auto col-10 col-md-11" />
 
+        <div
+          class="d-flex flex-column flex-md-row align-items-stretch justify-content-between text-center text-md-start text-md-left"
+        >
+          <div
+            class="col-md-5 col-12 p-5 bg-white d-flex justify-content-center justify-content-md-start"
+          >
+            <img
+              src="/assets/images/snus-prime_logo.png"
+              class="img-fluid"
+              style="width: 50%; min-width: 200px"
+              alt="SNUS PRIME logo"
+            />
+          </div>
 
+          <div class="col-md-4 col-12 p-4">
+            <h3>Contactos</h3>
 
-  <script>
-    !function (t, e, c, n) {
-      var s = e.createElement(c);
-      s.async = 1, s.src = 'https://scripts.claspo.io/scripts/' + n + '.js';
-      var r = e.scripts[0];
-      r.parentNode.insertBefore(s, r);
-      var f = function () {
-        f.c(arguments);
-      };
-      f.q = [];
-      f.c = function () {
-        f.q.push(arguments);
-      };
-      t['claspo'] = t['claspo'] || f;
-    }(window, document, 'script', 'B5A6533BEDBA4D7D877021D15722CBA9');
-  </script>
-  <script>claspo('init');</script>
+            <a class="fs-6 d-block contact-link" href="tel:+351968509488"
+              >T: +351 968 509 488</a
+            >
+            <a class="fs-6 d-block contact-link" href="tel:+351938779896"
+              >T: +351 938 779 896</a
+            >
+            <a class="fs-6 d-block contact-link" href="tel:+351913248028"
+              >T: +351 913 248 028</a
+            >
+            <a id="email-link" class="fs-6 d-block contact-link"
+              >snusprimestore@gmail.com</a
+            >
 
+            <script>
+              const isMobile = /iPhone|iPad|iPod|Android/i.test(
+                navigator.userAgent
+              );
+              const link = document.getElementById("email-link");
 
+              if (isMobile) {
+                link.href = "mailto:snusprimestore@gmail.com";
+              } else {
+                link.href =
+                  "https://mail.google.com/mail/?view=cm&fs=1&to=snusprimestore@gmail.com";
+                link.target = "_blank";
+              }
+            </script>
+          </div>
 
+          <div class="col-md-3 col-12 p-4">
+            <h3>Siga-nos</h3>
+            <a
+              href="https://www.instagram.com/snusprime_store/"
+              target="_blank"
+            >
+              <img
+                src="/assets/icons/instagram.png"
+                class="icon-footer nav-link mx-auto mx-md-0 d-block"
+                alt="Instagram"
+              />
+            </a>
+          </div>
+        </div>
 
+        <hr class="mx-auto col-10 col-md-11" />
+      </div>
 
-  <script type="text/javascript" src="/assets/js/router.js"></script>
-</body>
+      <div class="text-center">
+        <a
+          onclick="goToRoute('/politica-privacidade')"
+          class="txt-footer text-dark me-3 text-decoration-none"
+        >
+          Política de Privacidade
+        </a>
 
+        <a
+          href="https://www.livroreclamacoes.pt/Inicio/"
+          target="_blank"
+          class="txt-footer text-dark text-decoration-none"
+          >Livro de Reclamações</a
+        >
+        <p class="mb-1">&copy; <span id="current-year"></span> SNUS PRIME</p>
+      </div>
+    </footer>
+
+    <script>
+      !(function (t, e, c, n) {
+        var s = e.createElement(c);
+        (s.async = 1),
+          (s.src = "https://scripts.claspo.io/scripts/" + n + ".js");
+        var r = e.scripts[0];
+        r.parentNode.insertBefore(s, r);
+        var f = function () {
+          f.c(arguments);
+        };
+        f.q = [];
+        f.c = function () {
+          f.q.push(arguments);
+        };
+        t["claspo"] = t["claspo"] || f;
+      })(window, document, "script", "B5A6533BEDBA4D7D877021D15722CBA9");
+    </script>
+    <script>
+      claspo("init");
+    </script>
+
+    <script type="text/javascript" src="/assets/js/router.js"></script>
+  </body>
 </html>

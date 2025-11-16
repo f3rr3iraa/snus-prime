@@ -104,6 +104,26 @@ async function insertCartProductInfo(newCartProduct, element) {
     });
 }
 
+// 🔴 Atualiza a bolinha do carrinho
+function updateCartBadge() {
+    loadCart();
+    const total = cart.reduce((sum, item) => sum + item.qt, 0);
+
+    const badge = document.getElementById("cart-badge");
+    if (!badge) return;
+
+    if (total > 0) {
+        badge.textContent = total;
+        badge.style.display = "block";
+    } else {
+        badge.style.display = "none";
+    }
+}
+
+// Quando a página carregar → atualizar badge
+document.addEventListener("DOMContentLoaded", updateCartBadge);
+
+
 
 function updateProductQt(productName, newQt) {
     loadCart();
@@ -112,9 +132,9 @@ function updateProductQt(productName, newQt) {
         item.qt = newQt;
         saveCart();
         renderCart();
+        updateCartBadge();
     }
 }
-
 
 function addProductQt(productName) {
     loadCart();
@@ -123,6 +143,7 @@ function addProductQt(productName) {
         item.qt += 1;
         saveCart();
         renderCart();
+        updateCartBadge(); 
     }
 }
 
@@ -136,6 +157,7 @@ function reduceProductQt(productName) {
         }
         saveCart();
         renderCart();
+        updateCartBadge(); 
     }
 }
 
@@ -144,4 +166,16 @@ function removeProduct(productName) {
     cart = cart.filter(p => p.name !== productName);
     saveCart();
     renderCart();
+    updateCartBadge(); 
 }
+
+
+function addToCart(product) {
+    loadCart();
+    const existing = cart.find(p => p.id === product.id);
+    if (existing) existing.qt += 1;
+    else cart.push({ ...product, qt: 1 });
+    saveCart();
+    updateCartBadge(); 
+}
+

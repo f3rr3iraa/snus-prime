@@ -13,6 +13,8 @@ async function renderDetailsProducts(product) {
             insertDetailsProductInfo(NewDetailsProduct, product)
             containerElement.appendChild(NewDetailsProduct)
         })
+
+        
 }
 
 

@@ -58,26 +58,27 @@ const locationHandler = async () => {
     if (location.length === 0) location = "/";
 
     if (location.startsWith("/detalhes/")) {
-        await loadProducts();
-        const productSlug = decodeURIComponent(location.split("/")[2]);
-        const product = products.find(
-            (p) => slugify(p.photoPath) === productSlug
-        );
+    await loadProducts();
+    const productSlug = decodeURIComponent(location.split("/")[2]);
+    const product = products.find(
+        (p) => slugify(p.photoPath) === productSlug
+    );
 
-        if (!product) {
-            window.history.pushState({}, "", "/");
-            return locationHandler();
-        }
-
-        const html = await fetch(routes["/detalhes"].template).then((res) => res.text());
-        document.getElementById("content").innerHTML = html;
-
-        await renderDetailsProducts(product);
-
-        await changeActive("/detalhes")
-        setTimeout(() => window.scrollTo({ top: 0 }), 0);
-        return;
+    if (!product) {
+        window.history.pushState({}, "", "/");
+        return locationHandler();
     }
+
+    const html = await fetch(routes["/detalhes"].template).then(res => res.text());
+    document.getElementById("content").innerHTML = html;
+
+    await renderDetailsProducts(product);
+
+    await changeActive("/detalhes") // 🔹 Aqui você passa "/detalhes"
+    setTimeout(() => window.scrollTo({ top: 0 }), 0);
+    return;
+}
+
 
     let route = routes[location] || routes["404"];
     if (route.title === "404") {
@@ -95,7 +96,12 @@ const locationHandler = async () => {
 
 async function changeActive(location) {
     console.log("location => ", location);
+
+    // Atualiza SEMPRE a bolinha do carrinho
+    updateCartBadge();      
+
     document.getElementById('form-contacto').classList.remove('d-none')
+
     switch (location) {
         case "/produtos":
             await getFilterLimits();
@@ -120,8 +126,8 @@ async function changeActive(location) {
             break
         default:
     }
-
 }
+
 
 function slugify(name) {
     return name
