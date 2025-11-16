@@ -197,30 +197,97 @@ async function applyFilters() {
     renderProducts(filteredProducts)
 }
 
-async function renderProducts(filteredProducts = products) {
-    const sortedProducts = [...filteredProducts].sort((a, b) => {
-        return a.name.localeCompare(b.name);
+
+let currentSort = null; 
+
+function sortProducts(productsArray) {
+    let sorted = [...productsArray];
+    if (currentSort === "asc") {
+        sorted.sort((a, b) => a.price - b.price);
+    } else if (currentSort === "desc") {
+        sorted.sort((a, b) => b.price - a.price);
+    } else {
+        sorted.sort((a, b) => a.name.localeCompare(b.name));
+    }
+    return sorted;
+}
+
+function initSortButtons() {
+    const buttons = [
+        { asc: "sort-asc", desc: "sort-desc" },
+        { asc: "sort-asc-mobile", desc: "sort-desc-mobile" }
+    ];
+
+    buttons.forEach(btnGroup => {
+        const sortAscBtn = document.getElementById(btnGroup.asc);
+        const sortDescBtn = document.getElementById(btnGroup.desc);
+
+        if (!sortAscBtn || !sortDescBtn) return;
+
+        sortAscBtn.addEventListener("click", () => {
+            if (currentSort === "asc") {
+                currentSort = null; 
+                removeActiveFromAllButtons();
+            } else {
+                currentSort = "asc";
+                setActiveButton("asc");
+            }
+            applyFilters();
+        });
+
+        sortDescBtn.addEventListener("click", () => {
+            if (currentSort === "desc") {
+                currentSort = null;
+                removeActiveFromAllButtons();
+            } else {
+                currentSort = "desc";
+                setActiveButton("desc");
+            }
+            applyFilters();
+        });
     });
+}
+
+function removeActiveFromAllButtons() {
+    document.querySelectorAll(".sort-btn").forEach(btn => btn.classList.remove("active"));
+}
+
+function setActiveButton(type) {
+    removeActiveFromAllButtons();
+    if (type === "asc") {
+        document.querySelectorAll("#sort-asc, #sort-asc-mobile").forEach(btn => btn.classList.add("active"));
+    } else if (type === "desc") {
+        document.querySelectorAll("#sort-desc, #sort-desc-mobile").forEach(btn => btn.classList.add("active"));
+    }
+}
+
+
+async function renderProducts(filteredProducts = products) {
+    const sortedProducts = sortProducts(filteredProducts);
 
     fetch("/templates/components/product-card.html")
         .then((response) => {
             if (!response.ok)
-                throw new Error("Network response was not ok " + response.statusText)
-            return response.text()
+                throw new Error("Network response was not ok " + response.statusText);
+            return response.text();
         })
         .then((data) => {
-            const containerElement = document.getElementById("product-catalog-content")
-            containerElement.innerHTML = ""
+            const containerElement = document.getElementById("product-catalog-content");
+            containerElement.innerHTML = "";
             sortedProducts.forEach((element) => {
-                const newProduct = document.createElement("div")
-                newProduct.classList.add("col-6", "col-md-3")
-                newProduct.innerHTML = data
-                insertProductInfo(newProduct, element)
-                containerElement.appendChild(newProduct)
-            })
-        })
+                const newProduct = document.createElement("div");
+                newProduct.classList.add("col-6", "col-md-3");
+                newProduct.innerHTML = data;
+                insertProductInfo(newProduct, element);
+                containerElement.appendChild(newProduct);
+                setTimeout(() => newProduct.classList.add("show"), 50);
+            });
+        });
 }
 
+
+
+// Função insertProductInfo permanece igual
 async function insertProductInfo(newProduct, element) {
     const productImage = newProduct.querySelector("#product-image");
     const productBadge = newProduct.querySelector("#product-badge");
@@ -250,7 +317,7 @@ async function insertProductInfo(newProduct, element) {
     productName.textContent = `${element.name} | ${element.nicotine_mg} Mg`;
     productPrice.textContent = `${element.price}€`;
 
-    if (newProducts.includes(element.name)) {
+    if (newProducts.includes(element.photoPath)) {
         productBadge.textContent = "Novidade";
         productBadge.classList.add("novidade-inf");
     }

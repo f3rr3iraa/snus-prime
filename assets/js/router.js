@@ -104,6 +104,7 @@ async function changeActive(location) {
             renderPowerFilters();
             renderSizeFilters();
             await renderProducts();
+            initSortButtons();  
             break;
         case "/contactos":
             document.getElementById('form-contacto').classList.add('d-none')

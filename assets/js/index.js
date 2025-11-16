@@ -2,6 +2,7 @@ let products = []
 let newProducts = []
 let filters = new Filters()
 let cart = []
+let detailsQtSelected = 1;
 
 function getRandomIndexes(array) {
   const indexes = [];
@@ -109,7 +110,8 @@ function addToCart(photoName) {
 
 async function init() {
   await loadProducts();
-  newProducts = products.slice(-4).map(p => p.name);
+  newProducts = products.slice(-4).map(p => p.photoPath);
+  console.log(newProducts)
   cart = JSON.parse(localStorage.getItem('cart')) || [];
 
   console.log(products);

@@ -1,12 +1,12 @@
 <div class="card border-0 h-100 product-see-details">
-    <div class="position-relative">
+    <div class="position-relative" id="other-products-container" onclick="goToProduct(this.dataset.id)">
         <span id="other-product-badge" class="badge position-absolute top-0 start-0 m-2 text-white"></span>
         <img id="other-product-image" class="card-img-top img-fluid" alt="Pineapple Mango Coconut">
         <button class="btn-see-details">Detalhes</button>
     </div>
     <div class="card-body text-start p-2">
         <p id="other-product-brand" class="text-uppercase small text-muted mt-0"></p>
-        <h6 id="other-product-name-nicotine" class="card-title fw-bold mb-1 mt-2"></h6>
+        <h6 id="other-product-name-nicotine" class="card-title fw-bold mb-1 mt-2 product-name-nicotine"></h6>
         <p class="mb-1">
             <span id="other-product-price" class="fw-bold"></span>
             <span id="other-product-old-promo-price" class="text-decoration-line-through text-muted"></span>

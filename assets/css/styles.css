@@ -242,6 +242,18 @@ footer {
 
 
 
+.btn-price {
+  background: linear-gradient(135deg, #8c45f7, #a56dfc);
+  border: none;
+  color: #ffffff;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.35);
+}
+
+.btn-amount:focus {
+  outline: none;
+  box-shadow: none !important;
+  border-color: #cccccc; 
+}
 
 
 
@@ -414,7 +426,12 @@ input[type="range"].custom-range::-moz-range-thumb:active {
 }
 
 
-
+.product-name-nicotine {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: block;
+  }
 
 /* para as "..." do nome do produto em mobile*/
 @media (max-width: 576px) {
@@ -468,11 +485,14 @@ input[type="range"].custom-range::-moz-range-thumb:active {
 }
 
 
+
+
+
+
 .sort-btn {
     background: none;
     border: none;
     color: black;
-    font-weight: 500;
     cursor: pointer;
     transition: color 0.2s ease;
     text-decoration: none;
@@ -484,7 +504,7 @@ input[type="range"].custom-range::-moz-range-thumb:active {
 }
 
 .sort-btn.active {
-    text-decoration: underline;
-    font-weight: 600;
-    color: #bfbfbf;
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
 }

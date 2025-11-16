@@ -14,6 +14,7 @@ async function renderOtherProducts() {
             containerElement.innerHTML = ""
             otherProducts.forEach((element) => {
                 const NewOtherProduct = document.createElement("div")
+                NewOtherProduct.classList.add("col-6", "col-md-3");                
                 NewOtherProduct.innerHTML = data
                 insertOtherProductInfo(NewOtherProduct, element)
                 containerElement.appendChild(NewOtherProduct)
@@ -29,6 +30,7 @@ async function insertOtherProductInfo(NewOtherProduct, element, i) {
     const carouselProductName= NewOtherProduct.querySelector("#other-product-name-nicotine")
     const carouselProductPrice= NewOtherProduct.querySelector("#other-product-price")
     const carouselProductOldPrice = NewOtherProduct.querySelector("#other-product-old-promo-price")
+    const carouselOtherProductsContainer = NewOtherProduct.querySelector("#other-products-container")
 
     const basePath = `/data/img/${element.photoPath}`;
     const extensions = [".webp", ".jpg", ".jpeg", ".png"];
@@ -52,6 +54,6 @@ async function insertOtherProductInfo(NewOtherProduct, element, i) {
         carouselProductBadge.classList.add("promotion-inf")
         carouselProductOldPrice.textContent = `${element.oldPrice}€`
     }
-
+    carouselOtherProductsContainer.setAttribute("data-id", element.photoPath);
   
 }

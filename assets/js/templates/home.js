@@ -1,7 +1,8 @@
 async function renderProductsCarousel() {
-    const carouselProducts = products.filter(p =>
-        newProducts.includes(p.name)
-    );
+    const carouselProducts = products
+    .filter(p => newProducts.includes(p.photoPath))
+    .slice(-4); 
+
 
     fetch("/templates/components/carousel-slide.html")
         .then((response) => {

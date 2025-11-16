@@ -28,15 +28,15 @@
 
             <div class="row mt-4 gx-2">
                 <div class="col-8">
-                    <input class="form-control text-center d-none" type="text" value="1" id="qt-other-value">
+                    <input class="form-control text-center d-none btn-amount rounded-0" type="text" value="1" id="qt-other-value">
                 </div>
                 <div class="col-4">
-                    <input class="form-control text-center d-none" type="text" value="1" id="qt-other-value-price" disabled>
+                    <input class="form-control text-center d-none btn-price rounded-0" type="text" value="1" id="qt-other-value-price" disabled>
                 </div>
             </div>
 
             <!-- Botão -->
-            <button class="mt-4 btn-buy w-100 btn-lg mb-4">Adicionar ao Carrinho</button>
+            <button class="mt-4 btn-buy w-100 btn-lg mb-4" id="addToCart" onclick="addToCartFromDetails(this.dataset.id)">Adicionar ao Carrinho</button>
 
             <!-- Informação -->
             <div class="mb-3">
