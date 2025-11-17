@@ -108,34 +108,25 @@
         </div>
 
         <!-- icon da shop -->
-        <!-- icon da shop -->
         <div
-          class="col-3 d-none d-lg-flex justify-content-center align-items-center"
+          class="col-md-3 col-6 d-flex justify-content-md-center justify-content-end align-items-center"
         >
-          <div
-            style="position: relative; cursor: pointer"
-            onclick="goToRoute('/carrinho')"
-          >
+          <div class="position-relative">
             <img
+              id="cart-icon"
               src="../assets/icons/shop.png"
               class="icon nav-link"
               style="height: 26px; width: 26px"
+              onclick="goToRoute('/carrinho')"
               onmouseover="this.src='../assets/icons/shop_hover.png'"
               onmouseout="this.src='../assets/icons/shop.png'"
             />
 
             <span
               id="cart-badge"
+              class="position-absolute top-0 start-100 translate-middle badge rounded-pill d-none"
               style="
-                position: absolute;
-                top: -8px;
-                right: -12px;
                 background: #7a35e8;
-                color: white;
-                border-radius: 50%;
-                padding: 1px 6px;
-                font-size: 11px;
-                display: none;
               "
             >
               0
@@ -347,3 +338,8 @@
     <script type="text/javascript" src="/assets/js/router.js"></script>
   </body>
 </html>
+<script>
+    window.addEventListener("DOMContentLoaded", () => {
+        updateCartBadge();
+    });
+</script>

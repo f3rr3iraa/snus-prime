@@ -104,7 +104,10 @@ function addToCart(photoName) {
   }
 
   localStorage.setItem('cart', JSON.stringify(cart));
+
+  updateCartBadge();
 }
+
 
 
 

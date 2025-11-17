@@ -104,26 +104,6 @@ async function insertCartProductInfo(newCartProduct, element) {
     });
 }
 
-// 🔴 Atualiza a bolinha do carrinho
-function updateCartBadge() {
-    loadCart();
-    const total = cart.reduce((sum, item) => sum + item.qt, 0);
-
-    const badge = document.getElementById("cart-badge");
-    if (!badge) return;
-
-    if (total > 0) {
-        badge.textContent = total;
-        badge.style.display = "block";
-    } else {
-        badge.style.display = "none";
-    }
-}
-
-// Quando a página carregar → atualizar badge
-document.addEventListener("DOMContentLoaded", updateCartBadge);
-
-
 
 function updateProductQt(productName, newQt) {
     loadCart();
@@ -136,6 +116,7 @@ function updateProductQt(productName, newQt) {
     }
 }
 
+
 function addProductQt(productName) {
     loadCart();
     const item = cart.find(p => p.name === productName);
@@ -143,9 +124,10 @@ function addProductQt(productName) {
         item.qt += 1;
         saveCart();
         renderCart();
-        updateCartBadge(); 
+        updateCartBadge();
     }
 }
+
 
 function reduceProductQt(productName) {
     loadCart();
@@ -157,25 +139,38 @@ function reduceProductQt(productName) {
         }
         saveCart();
         renderCart();
-        updateCartBadge(); 
+        updateCartBadge();
     }
 }
+
 
 function removeProduct(productName) {
     loadCart();
     cart = cart.filter(p => p.name !== productName);
     saveCart();
     renderCart();
-    updateCartBadge(); 
+    updateCartBadge();
 }
 
 
-function addToCart(product) {
+
+function updateCartBadge() {
     loadCart();
-    const existing = cart.find(p => p.id === product.id);
-    if (existing) existing.qt += 1;
-    else cart.push({ ...product, qt: 1 });
-    saveCart();
-    updateCartBadge(); 
+    const badge = document.getElementById("cart-badge");
+    if (!badge) {
+        console.warn("⚠️ cart-badge não encontrado no DOM");
+        return;
+    }
+
+    const totalQt = cart.reduce((sum, item) => sum + item.qt, 0);
+
+    if (totalQt > 0) {
+        badge.textContent = totalQt;
+        badge.classList.remove("d-none");
+    } else {
+        badge.classList.add("d-none");
+    }
+
+    console.log("🛒 Badge atualizado:", totalQt);
 }
 
