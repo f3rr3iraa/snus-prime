@@ -146,6 +146,9 @@ function changeQtWanted(flag) {
 document.addEventListener("input", (event) => {
     const target = event.target;
     if (target && target.id === "qt-other-value") {
+
+        target.value = target.value.replace(/[^0-9]/g, '');
+        
         const qtOtherValuePrice = document.getElementById("qt-other-value-price");
         const addToCartBtn = document.getElementById("addToCart");
 

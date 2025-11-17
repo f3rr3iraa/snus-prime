@@ -1,7 +1,7 @@
 <div class="mt-2">
   <div class="row align-items-center mb-4">
     <!-- Item -->
-    <div class="col-5">
+    <div class="col-md-5 col-12">
       <div class="row">
         <div class="col-4 d-flex justify-content-center align-items-center">
           <img id="cart-product-img" src="/assets/images/snus-prime_logo.png" alt="Logo" class="w-75">
@@ -10,42 +10,45 @@
         <div class="col-8 d-flex flex-column justify-content-center">
           <h5><strong id="cart-product-name-nicotine"></strong></h5>
 
-          <p class="mb-1 small">Marca: <span id="cart-product-brand"></span></p>
-          <p class="mb-1 small">Força: <span id="cart-product-power"></span></p>
-          <p class="mb-1 small">Sabor: <span id="cart-product-flavor"></span></p>
-          <p class="mb-0 small">Tamanho: <span id="cart-product-size"></span></p>
+          <p class="mb-1 small d-none d-lg-flex">Marca: <span id="cart-product-brand"></span></p>
+          <p class="mb-1 small d-none d-lg-flex">Força: <span id="cart-product-power"></span></p>
+          <p class="mb-1 small d-none d-lg-flex">Sabor: <span id="cart-product-flavor"></span></p>
+          <p class="mb-0 small d-none d-lg-flex">Tamanho: <span id="cart-product-size"></span></p>
         </div>
 
 
 
       </div>
     </div>
+    
 
-    <!-- Preço -->
-    <div class="col-2 text-center">
-      <span id="cart-product-price" class="fw-bold"></span>
-      <br>
-      <span id="cart-product-old-promo-price" class="text-decoration-line-through text-muted"></span>
-    </div>
-
-    <!-- Quantidade -->
-    <div class="col-2 text-center">
-      <div class="d-flex justify-content-center align-items-center mb-2">
-        <button id="btnReduce" type="button" class="btn btn-cart fs-2"
-          onclick="reduceProductQt('${element.name}')">-</button>
-        <input class="form-control text-center mx-2 rounded-0" style="width: 60px;" type="text" value="1" id="cart-product-qt">
-        <button id="btnAdd" type="button" class="btn btn-cart fs-3" onclick="addProductQt('${element.name}')">+</button>
+      <!-- Preço -->
+      <div class="col-md-2 text-center">
+        <span id="cart-product-price" class="fw-bold d-none d-lg-flex justify-content-center"></span>
+        <br>
+        <span id="cart-product-old-promo-price" class="text-decoration-line-through text-muted"></span>
       </div>
-    </div>
-
-    <!-- Total -->
-    <div class="col-2 text-center" id="cart-product-total-price">
-    </div>
-
-    <div class="col-1 text-center">
-      <button type="button" class="btn btn-cart text-danger p-0 fs-4" onclick="removeProduct('${element.name}')"><i
+      
+      <!-- Quantidade -->
+      <div class="col-md-2 col-4  text-center ms-md-0 ms-5">
+        <div class="d-flex justify-content-center align-items-center mb-2">
+          <button id="btnReduce" type="button" class="btn btn-cart fs-2"
+          onclick="reduceProductQt('${element.name}')">-</button>
+          <input class="form-control text-center mx-2 rounded-0 input-form" style="width: 60px;" type="text" value="1" id="cart-product-qt">
+          <button id="btnAdd" type="button" class="btn btn-cart fs-3" onclick="addProductQt('${element.name}')">+</button>
+        </div>
+      </div>
+      
+      <!-- Total -->
+      <div class="col-md-2 col-4  text-center" id="cart-product-total-price">
+      </div>
+      
+      <div class="col-md-1 col-1  text-center">
+        <button type="button" class="btn btn-cart text-danger p-0 fs-4" onclick="removeProduct('${element.name}')"><i
           class="bi bi-trash"></i></button>
-
-    </div>
-  </div>
+          
+        </div>
+      </div> 
 </div>
+
+

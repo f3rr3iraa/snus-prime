@@ -322,6 +322,9 @@ footer {
 }
 
 
+
+
+
 .input-form::placeholder {
     color: #bfbfbf;
 }
@@ -442,6 +445,11 @@ input[type="range"].custom-range::-moz-range-thumb:active {
     display: block;
   }
 }
+
+
+
+
+
 
 .btn-cart,
 .btn-cart:focus,

@@ -6,7 +6,7 @@
 
 <!-- https://cdn.prod.website-files.com/605826c62e8de87de744596e/62331f2bb5a6d8a785593909_8AkqmmgGM4Y65j_NwNDXKtfvINDrPAO0Ro_GZMsHYwfrMkGKVBBXeq8uLjkpsonpNzFKkORaMnAQefsbTSAFRV-TRTAWPFWGEabmd_f6IoJeWMUu0qZ1Nq9TAR9NZsbP3oMaiLIy.png -->
 
-<div class="d-md-flex w-100 p-4">
+<div class="d-md-flex w-100 p-md-4 p-1">
   <!-- Cart Products -->
   <div class="col-md-9 col-12 d-flex flex-column">
     <!-- Header  -->
@@ -38,7 +38,7 @@
   </div>
 
   <!-- Summary -->
-  <div class="col-md-3 col-12  px-md-4 px-0 py-2">
+  <div class="col-md-3 col-12  px-md-4 px-3 py-2">
     <h4>Sumário</h4>
     <h4>Subtotal: <span id="cart-subtotal">0.00€</span></h4>
     <div class="form-check">
@@ -59,8 +59,47 @@
         Em mão
       </label>
     </div>
-    <input class="form-control text-center" type="text">
+    
+    <div class="mb-3">
+      <label for="nome" class="form-label">Nome</label>
+      <input type="text" class="form-control input-form" id="nome-buy" placeholder="Inserir o seu nome..." required>
+    </div>
 
-    <button type=" button" class="btn btn-dark">Confirmar</button>
+    <div class="mb-3">
+      <label for="email" class="form-label">Email</label>
+      <input type="text" class="form-control input-form" id="email-buy" placeholder="Inserir o seu email..." required>
+    </div>
+
+    <div class="mb-3">
+      <label for="contacto" class="form-label">Contacto</label>
+      <input type="text" class="form-control input-form" id="contacto-buy" placeholder="Inserir o seu contacto..." required>
+    </div>
+
+    <div class="mb-3">
+      <label for="morada" class="form-label">Morada</label>
+      <input type="text" class="form-control input-form" id="morada-buy" placeholder="Inserir a sua morada..." required>
+    </div>
+
+    <div class="mb-3">
+      <label for="cidade" class="form-label">Cidade</label>
+      <input type="text" class="form-control input-form" id="cidade-buy" placeholder="Inserir a sua cidade..." required>
+    </div>
+
+    <div class="mb-3">
+      <label for="codigo-postal" class="form-label">Código postal</label>
+      <input type="text" class="form-control input-form" id="codigo-postal-buy" placeholder="Inserir o seu código postal..." required>
+    </div>
+
+   <div class="mb-3">
+    <label for="codigo-postal" class="form-label">Local de Encontro [ Porto/Santo Tirso]</label>
+    <input type="text" class="form-control input-form" id="codigo-postal-buy" placeholder="Inserir o local de encontro..." required>
+    <div id="codigo-postal-error" class="form-text text-danger" >
+      Entraremos em contacto para definir a data do encontro.
+    </div>
+  </div>
+
+      
+
+    <button type="button" class="mt-2 p-2 btn-buy w-100 btn-sm">Confirmar</button>
   </div>
 </div>
