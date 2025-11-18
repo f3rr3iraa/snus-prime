@@ -114,13 +114,14 @@ async function changeActive(location) {
             break
         case "/carrinho":
             await renderCart();
+            initCheckoutValidation();
             break
         case "/detalhes":
             await renderOtherProducts();
+            detailsQtSelected = 1;
             break
         default:
     }
-
 }
 
 function slugify(name) {

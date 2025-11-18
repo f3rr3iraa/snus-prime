@@ -219,6 +219,7 @@ function addToCartFromDetails(photoName) {
     console.log("💾 Cart saved:", JSON.parse(localStorage.getItem("cart")));
 
     console.log(`✅ Added ${quantityToAdd}x ${product.name} to cart`);
+    updateCartBadge();
 }
 
 function showErrorToast(message) {

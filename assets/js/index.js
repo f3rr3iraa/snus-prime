@@ -108,9 +108,6 @@ function addToCart(photoName) {
   updateCartBadge();
 }
 
-
-
-
 async function init() {
   await loadProducts();
   newProducts = products.slice(-4).map(p => p.photoPath);

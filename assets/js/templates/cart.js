@@ -103,7 +103,7 @@ async function insertCartProductInfo(newCartProduct, element) {
   btnRemove.onclick = () => removeProduct(element.name);
 
   cartProductQt.addEventListener("change", (e) => {
-    
+
     const newValue = parseInt(e.target.value, 10);
 
     if (isNaN(newValue) || newValue < 1) {
@@ -175,4 +175,92 @@ function updateCartBadge() {
     badge.classList.add("d-none");
   }
   console.log("🛒 Badge atualizado:", totalQt);
+}
+
+function initCheckoutValidation() {
+  const btn = document.querySelector('.btn-buy');
+  if (!btn) {
+    console.warn("btn-buy not found — validation not initialized.");
+    return;
+  }
+
+  const payments = document.querySelectorAll('.payment-check');
+  const paymentError = document.getElementById('payment-error');
+  const localEncontroInput = document.getElementById('local-encontro-buy');
+  const localEncontroContainer = localEncontroInput.parentElement;
+
+  // Hide Local de Encontro initially
+  localEncontroContainer.style.display = 'none';
+  localEncontroInput.required = false;
+
+  // Initialize dataset.checked for radio-like behavior
+  payments.forEach(ch => ch.dataset.checked = "false");
+
+  // Payment checkboxes click handler
+  payments.forEach(ch => {
+    ch.addEventListener('click', () => {
+      if (ch.dataset.checked === "true") {
+        ch.checked = true;
+      }
+
+      payments.forEach(other => {
+        if (other !== ch) {
+          other.checked = false;
+          other.dataset.checked = "false";
+        }
+      });
+
+      ch.dataset.checked = "true";
+
+      // Show/hide Local de Encontro if "Em mão" is selected
+      if (ch.id === 'checkMao' && ch.checked) {
+        localEncontroContainer.style.display = 'block';
+        localEncontroInput.required = true;
+      } else {
+        localEncontroContainer.style.display = 'none';
+        localEncontroInput.required = false;
+        localEncontroInput.classList.remove('is-invalid');
+      }
+
+      // Hide payment error
+      if (ch.checked) {
+        paymentError.classList.add('d-none');
+        paymentError.classList.remove('d-block');
+      }
+    });
+  });
+
+  // Buy button click handler
+  btn.addEventListener('click', function () {
+    const form = document.getElementById('checkout-form');
+    let valid = true;
+
+    // Validate payment method
+    const oneChecked = Array.from(payments).some(ch => ch.checked);
+    if (!oneChecked) {
+      valid = false;
+      paymentError.classList.add('d-block');
+      paymentError.classList.remove('d-none');
+    } else {
+      paymentError.classList.add('d-none');
+      paymentError.classList.remove('d-block');
+    }
+
+    // Validate text inputs
+    form.querySelectorAll('input').forEach(input => {
+      if (input.required && !input.value.trim()) {
+        input.classList.add('is-invalid');
+        input.classList.remove('is-valid'); // ensure no green
+        valid = false;
+      } else {
+        input.classList.remove('is-invalid');
+        input.classList.remove('is-valid'); // keep default look
+      }
+    });
+
+    if (!valid) return;
+
+    // SUCCESS
+    console.log("Formulário válido. Enviando...");
+  });
 }
