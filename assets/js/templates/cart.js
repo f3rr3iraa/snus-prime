@@ -103,7 +103,6 @@ async function insertCartProductInfo(newCartProduct, element) {
   btnRemove.onclick = () => removeProduct(element.name);
 
   cartProductQt.addEventListener("change", (e) => {
-
     const newValue = parseInt(e.target.value, 10);
 
     if (isNaN(newValue) || newValue < 1) {
@@ -159,7 +158,6 @@ function removeProduct(productName) {
   updateCartBadge();
 }
 
-
 function updateCartBadge() {
   loadCart();
   const badge = document.getElementById("cart-badge");
@@ -177,33 +175,36 @@ function updateCartBadge() {
   console.log("🛒 Badge atualizado:", totalQt);
 }
 
+let isSendingCheckout = false;
+
+
 function initCheckoutValidation() {
-  const btn = document.querySelector('.btn-buy');
+  const btn = document.querySelector(".btn-buy");
   if (!btn) {
     console.warn("btn-buy not found — validation not initialized.");
     return;
   }
 
-  const payments = document.querySelectorAll('.payment-check');
-  const paymentError = document.getElementById('payment-error');
-  const localEncontroInput = document.getElementById('local-encontro-buy');
+  const payments = document.querySelectorAll(".payment-check");
+  const paymentError = document.getElementById("payment-error");
+  const localEncontroInput = document.getElementById("local-encontro-buy");
   const localEncontroContainer = localEncontroInput.parentElement;
 
   // Hide Local de Encontro initially
-  localEncontroContainer.style.display = 'none';
+  localEncontroContainer.style.display = "none";
   localEncontroInput.required = false;
 
   // Initialize dataset.checked for radio-like behavior
-  payments.forEach(ch => ch.dataset.checked = "false");
+  payments.forEach((ch) => (ch.dataset.checked = "false"));
 
   // Payment checkboxes click handler
-  payments.forEach(ch => {
-    ch.addEventListener('click', () => {
+  payments.forEach((ch) => {
+    ch.addEventListener("click", () => {
       if (ch.dataset.checked === "true") {
         ch.checked = true;
       }
 
-      payments.forEach(other => {
+      payments.forEach((other) => {
         if (other !== ch) {
           other.checked = false;
           other.dataset.checked = "false";
@@ -213,119 +214,91 @@ function initCheckoutValidation() {
       ch.dataset.checked = "true";
 
       // Show/hide Local de Encontro if "Em mão" is selected
-      if (ch.id === 'checkMao' && ch.checked) {
-        localEncontroContainer.style.display = 'block';
+      if (ch.id === "checkMao" && ch.checked) {
+        localEncontroContainer.style.display = "block";
         localEncontroInput.required = true;
       } else {
-        localEncontroContainer.style.display = 'none';
+        localEncontroContainer.style.display = "none";
         localEncontroInput.required = false;
-        localEncontroInput.classList.remove('is-invalid');
+        localEncontroInput.classList.remove("is-invalid");
       }
 
       // Hide payment error
       if (ch.checked) {
-        paymentError.classList.add('d-none');
-        paymentError.classList.remove('d-block');
+        paymentError.classList.add("d-none");
+        paymentError.classList.remove("d-block");
       }
     });
   });
 
   // Buy button click handler
-  btn.addEventListener('click', function () {
-    const form = document.getElementById('checkout-form');
-    let valid = true;
+  document.getElementById("btn-buy").addEventListener("click", async () => {
+    if (isSendingCheckout) return;
+    isSendingCheckout = true;
 
-    // Validate payment method
-    const oneChecked = Array.from(payments).some(ch => ch.checked);
-    if (!oneChecked) {
-      valid = false;
-      paymentError.classList.add('d-block');
-      paymentError.classList.remove('d-none');
-    } else {
-      paymentError.classList.add('d-none');
-      paymentError.classList.remove('d-block');
-    }
+    try {
+      // Load cart
+      loadCart();
 
-    // Validate text inputs
-    form.querySelectorAll('input').forEach(input => {
-      if (input.required && !input.value.trim()) {
-        input.classList.add('is-invalid');
-        input.classList.remove('is-valid'); // ensure no green
-        valid = false;
+      // Get payment method
+      const payments = document.querySelectorAll(".payment-check");
+      let paymentMethod = "";
+      payments.forEach((ch) => {
+        if (ch.checked) paymentMethod = ch.id; // "checkReferencia", "checkPayPal", "checkMao"
+      });
+
+      // Build dados object from form
+      const dados = {
+        nome: document.getElementById("nome-buy").value.trim(),
+        email: document.getElementById("email-buy").value.trim(),
+        contacto: document.getElementById("contacto-buy").value.trim(),
+        morada: document.getElementById("morada-buy").value.trim(),
+        cidade: document.getElementById("cidade-buy").value.trim(),
+        codigo_postal: document
+          .getElementById("codigo-postal-buy")
+          .value.trim(),
+        local_encontro: document
+          .getElementById("local-encontro-buy")
+          .value.trim(),
+        cart: cart.map((item) => ({
+          name: item.name,
+          photoPath: item.photoPath,
+          price: item.price,
+          qt: item.qt,
+        })),
+        total: cart.reduce((sum, item) => sum + item.price * item.qt, 0),
+        paymentMethod,
+      };
+
+      // Send to Netlify function
+      const resposta = await fetch(
+        "/.netlify/functions/send-buy-confirmation",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(dados),
+        }
+      );
+
+      const resultado = await resposta.json();
+
+      if (resultado.success) {
+        showToast("✅ Compra confirmada! Email enviado.", "success");
+        // Clear cart
+        cart = [];
+        saveCart();
+        renderCart();
+        updateCartBadge();
+        // Reset form
+        document.getElementById("checkout-form").reset();
       } else {
-        input.classList.remove('is-invalid');
-        input.classList.remove('is-valid'); // keep default look
+        showToast("❌ Erro ao enviar confirmação da compra.", "error");
       }
-    });
-
-    if (!valid) return;
-
-    // SUCCESS
-    console.log("Formulário válido. Enviando...");
+    } catch (erro) {
+      console.error(erro);
+      showToast("⚠️ Erro de ligação com o servidor.", "error");
+    } finally {
+      isSendingCheckout = false;
+    }
   });
 }
-
-let isSendingCheckout = false;
-
-document.getElementById("btn-buy").addEventListener("click", async () => {
-  if (isSendingCheckout) return;
-  isSendingCheckout = true;
-
-  try {
-    // Load cart
-    loadCart();
-
-    // Get payment method
-    const payments = document.querySelectorAll(".payment-check");
-    let paymentMethod = "";
-    payments.forEach((ch) => {
-      if (ch.checked) paymentMethod = ch.id; // "checkReferencia", "checkPayPal", "checkMao"
-    });
-
-    // Build dados object from form
-    const dados = {
-      nome: document.getElementById("nome-buy").value.trim(),
-      email: document.getElementById("email-buy").value.trim(),
-      contacto: document.getElementById("contacto-buy").value.trim(),
-      morada: document.getElementById("morada-buy").value.trim(),
-      cidade: document.getElementById("cidade-buy").value.trim(),
-      codigo_postal: document.getElementById("codigo-postal-buy").value.trim(),
-      local_encontro: document.getElementById("local-encontro-buy").value.trim(),
-      cart: cart.map(item => ({
-        name: item.name,
-        photoPath: item.photoPath,
-        price: item.price,
-        qt: item.qt
-      })),
-      total: cart.reduce((sum, item) => sum + item.price * item.qt, 0),
-      paymentMethod
-    };
-
-    // Send to Netlify function
-    const resposta = await fetch("/.netlify/functions/send-buy-confirmation", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(dados),
-    });
-
-    const resultado = await resposta.json();
-
-    if (resultado.success) {
-      showToast("✅ Compra confirmada! Email enviado.", "success");
-      // Clear cart
-      cart = [];
-      saveCart();
-      renderCart();
-      updateCartBadge();
-      // Reset form
-      document.getElementById("checkout-form").reset();
-    } else {
-      showToast("❌ Erro ao enviar confirmação da compra.", "error");
-    }
-  } catch (erro) {
-    console.error(erro);
-    showToast("⚠️ Erro de ligação com o servidor.", "error");
-  } finally {
-    isSendingCheckout = false;
-  }
-});

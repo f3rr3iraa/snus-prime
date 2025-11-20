@@ -28,7 +28,7 @@ exports.handler = async function (event, context) {
       Referência: 789456123
       `;
     } else if (paymentMethod === "paypal") {
-      paymentDetails = `Faça o pagamento via PayPal para: snusprimestore@gmail.com`;
+      paymentDetails = `Faça o pagamento via PayPal para: snusprimestore@gmail.`;
     } else {
       paymentDetails = "Método de pagamento desconhecido.";
     }
