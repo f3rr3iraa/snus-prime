@@ -263,26 +263,53 @@ function setActiveButton(type) {
 
 
 async function renderProducts(filteredProducts = products) {
+    const loader = document.getElementById("product-loader");
+    const containerElement = document.getElementById("product-catalog-content");
+
+    loader.style.display = "block";
+    containerElement.style.opacity = "0";
+
     const sortedProducts = sortProducts(filteredProducts);
 
-    fetch("/templates/components/product-card.html")
-        .then((response) => {
-            if (!response.ok)
-                throw new Error("Network response was not ok " + response.statusText);
-            return response.text();
-        })
-        .then((data) => {
-            const containerElement = document.getElementById("product-catalog-content");
-            containerElement.innerHTML = "";
-            sortedProducts.forEach((element) => {
-                const newProduct = document.createElement("div");
-                newProduct.classList.add("col-6", "col-md-3");
-                newProduct.innerHTML = data;
-                insertProductInfo(newProduct, element);
-                containerElement.appendChild(newProduct);
-                setTimeout(() => newProduct.classList.add("show"), 50);
-            });
+    const MIN_LOAD_TIME = 600;
+    const startTime = performance.now();
+
+    const tempContainer = document.createElement("div");
+
+    try {
+        const response = await fetch("/templates/components/product-card.html");
+        if (!response.ok) throw new Error("Network response was not ok " + response.statusText);
+
+        const templateHTML = await response.text();
+
+        sortedProducts.forEach((element) => {
+            const newProduct = document.createElement("div");
+            newProduct.classList.add("col-6", "col-md-3");
+            newProduct.innerHTML = templateHTML;
+
+            insertProductInfo(newProduct, element);
+
+            tempContainer.appendChild(newProduct);
         });
+
+    } finally {
+        const elapsed = performance.now() - startTime;
+        const remaining = Math.max(0, MIN_LOAD_TIME - elapsed);
+
+        setTimeout(() => {
+            containerElement.innerHTML = tempContainer.innerHTML;
+
+            containerElement.style.transition = "opacity .3s";
+            containerElement.style.opacity = "1";
+
+            loader.style.display = "none";
+
+            containerElement.querySelectorAll(".col-6, .col-md-3").forEach(el => {
+                setTimeout(() => el.classList.add("show"), 50);
+            });
+
+        }, remaining);
+    }
 }
 
 

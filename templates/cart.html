@@ -82,13 +82,22 @@
     </div>
 
     <div class="mb-3">
-      <label for="contacto" class="form-label">Contacto</label>
-      <input type="text" class="form-control input-form" id="contacto-buy"
-        placeholder="Inserir o seu contacto..." required>
+      <label for="contacto-buy" class="form-label">Contacto</label>
+      <input 
+        type="tel" 
+        class="form-control input-form" 
+        id="contacto-buy"
+        placeholder="Inserir o seu contacto..." 
+        required
+        pattern="\d{9}"
+        maxlength="9"
+        inputmode="numeric"
+        oninput="this.value = this.value.replace(/[^0-9]/g, '')">
       <div class="invalid-feedback">
         Por favor insira o seu número.
       </div>
     </div>
+
 
     <div class="mb-3">
       <label for="morada" class="form-label">Morada</label>

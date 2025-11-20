@@ -39,6 +39,11 @@ const routes = {
         title: "privacy-policy",
         description: "Privacy Policy Page",
     },
+    "/parceiros": {
+        template: "/templates/parceiros.html",
+        title: "parceiros",
+        description: "Parceiros",
+    },
 }
 
 const route = (event) => {
@@ -50,7 +55,7 @@ const route = (event) => {
     if (targeUrl.origin === window.location.origin) {
         window.history.pushState({}, "", targeUrl.pathname);
     } else
-        window.open(targeUrl.href, "_blanck");
+        window.open(targeUrl.href, "_blank");
 };
 
 const locationHandler = async () => {
@@ -88,6 +93,19 @@ const locationHandler = async () => {
 
     const html = await fetch(route.template).then((response) => response.text());
     document.getElementById('content').innerHTML = html;
+
+    // === Configuração do link do email nas rotas desejadas ===
+    const emailLink = document.getElementById("email-link");
+    if (emailLink && (location === "/" || location === "/parceiros" || location === "/politica-privacidade")) {
+        const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+        if (isMobile) {
+            emailLink.href = "mailto:snusprimestore@gmail.com";
+        } else {
+            emailLink.href = "https://mail.google.com/mail/?view=cm&fs=1&to=snusprimestore@gmail.com";
+            emailLink.target = "_blank";
+        }
+    }
+    // ==========================================================
 
     await changeActive(location);
     setTimeout(() => window.scrollTo({ top: 0 }), 0);

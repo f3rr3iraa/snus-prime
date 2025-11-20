@@ -27,8 +27,16 @@
       </div>
       <div class="mb-3">
         <label for="contacto" class="form-label">Contacto</label>
-        <input type="tel" class="form-control input-form" id="contacto"
-          placeholder="Inserir o seu número de contacto..." required>
+        <input 
+          type="tel" 
+          class="form-control input-form" 
+          id="contacto"
+          placeholder="Inserir o seu número de contacto..." 
+          required
+          pattern="\\d{9}"
+          maxlength="9"
+          inputmode="numeric"
+          oninput="this.value = this.value.replace(/[^0-9]/g, '')">
       </div>
       <div class="mb-3">
         <label for="assunto" class="form-label">Assunto</label>

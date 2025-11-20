@@ -1,7 +1,8 @@
-let products = []
-let newProducts = []
-let filters = new Filters()
-let cart = []
+let products = [];
+let newProducts = [];
+let greatestProducts = [];
+let filters = new Filters();
+let cart = [];
 let detailsQtSelected = 1;
 
 function getRandomIndexes(array) {
@@ -33,17 +34,17 @@ function getRandom(array) {
 }
 
 // fechar offcanvas mobile
-document.addEventListener('DOMContentLoaded', () => {
-  const offcanvas = document.getElementById('mobileMenu');
+document.addEventListener("DOMContentLoaded", () => {
+  const offcanvas = document.getElementById("mobileMenu");
   const offcanvasInstance = bootstrap.Offcanvas.getOrCreateInstance(offcanvas);
 
-  document.querySelectorAll('#mobileMenu .nav-link').forEach(link => {
-    link.addEventListener('click', () => offcanvasInstance.hide());
+  document.querySelectorAll("#mobileMenu .nav-link").forEach((link) => {
+    link.addEventListener("click", () => offcanvasInstance.hide());
   });
 });
 
 async function loadProducts() {
-  const response = await fetch('/data/products.csv');
+  const response = await fetch("/data/products.csv");
   const csvText = await response.text();
 
   // Usa PapaParse
@@ -65,7 +66,7 @@ async function loadProducts() {
     Promo: "promotion",
   };
 
-  products = results.data.map(row => {
+  products = results.data.map((row) => {
     const product = new Product();
 
     Object.entries(headerMap).forEach(([csvHeader, prop]) => {
@@ -90,12 +91,12 @@ async function loadProducts() {
 }
 
 function addToCart(photoName) {
-  const product = products.find(p => photoName.includes(p.name));
+  const product = products.find((p) => photoName.includes(p.name));
   if (!product) return;
 
-  cart = JSON.parse(localStorage.getItem('cart')) || cart;
+  cart = JSON.parse(localStorage.getItem("cart")) || cart;
 
-  const existingItem = cart.find(item => item.name === product.name);
+  const existingItem = cart.find((item) => item.name === product.name);
 
   if (existingItem) {
     existingItem.qt += 1;
@@ -103,20 +104,23 @@ function addToCart(photoName) {
     cart.push({ ...product, qt: 1 });
   }
 
-  localStorage.setItem('cart', JSON.stringify(cart));
+  localStorage.setItem("cart", JSON.stringify(cart));
 
   updateCartBadge();
 }
 
 async function init() {
   await loadProducts();
-  newProducts = products.slice(-4).map(p => p.photoPath);
-  console.log(newProducts)
-  cart = JSON.parse(localStorage.getItem('cart')) || [];
+  newProducts = products.slice(-4).map((p) => p.photoPath);
+  console.log("newProducts => ", newProducts);
+  greatestProducts = products
+    .filter((p) => p.photoPath.startsWith("greatest"))
+    .map((p) => p.photoPath);
+  console.log("greatestProducts => ", greatestProducts);
+  cart = JSON.parse(localStorage.getItem("cart")) || [];
 
   console.log(products);
   locationHandler();
 }
 
 init();
-

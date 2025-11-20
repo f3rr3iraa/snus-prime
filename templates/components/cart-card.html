@@ -34,7 +34,7 @@
         <div class="d-flex justify-content-center align-items-center mb-2">
           <button id="btnReduce" type="button" class="btn btn-cart fs-2"
           onclick="reduceProductQt('${element.name}')">-</button>
-          <input class="form-control text-center mx-2 rounded-0 input-form" style="width: 60px;" type="text" value="1" id="cart-product-qt">
+          <input class="form-control text-center mx-2 rounded-0 input-form" style="width: 60px;" type="text" value="1" id="cart-product-qt" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
           <button id="btnAdd" type="button" class="btn btn-cart fs-3" onclick="addProductQt('${element.name}')">+</button>
         </div>
       </div>

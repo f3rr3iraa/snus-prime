@@ -5,9 +5,13 @@
     <title>SNUS PRIME</title>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    
+
+    <!-- href="https://jsousaecoelho.com/image/global/logo_icon_.png"  -->
+
     <link
       rel="icon"
-      href="https://jsousaecoelho.com/image/global/logo_icon_.png"
+      href="/assets/images/s.png"
       type="image/x-icon"
     />
     <!-- Bootstrap Imports -->
@@ -104,6 +108,13 @@
                 >Contactos</a
               >
             </li>
+             <li class="nav-item">
+              <a
+                class="nav-link text-dark px-2"
+                onclick="goToRoute('/parceiros')"
+                >Parceiros</a
+              >
+            </li>
           </ul>
         </div>
 
@@ -149,6 +160,7 @@
       </div>
     </nav>
 
+
     <!-- sidebar mobile  -->
     <div
       class="offcanvas offcanvas-end w-75"
@@ -182,6 +194,9 @@
         >
         <a class="nav-link text-dark py-2" onclick="goToRoute('/contactos')"
           >Contactos</a
+        >
+        <a class="nav-link text-dark py-2" onclick="goToRoute('/parceiros')"
+          >Parceiros</a
         >
         <hr class="w-100" />
         <div class="mt-auto w-100">

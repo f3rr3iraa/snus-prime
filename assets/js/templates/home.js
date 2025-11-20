@@ -1,6 +1,6 @@
 async function renderProductsCarousel() {
     const carouselProducts = products
-    .filter(p => newProducts.includes(p.photoPath))
+    .filter(p => greatestProducts.includes(p.photoPath))
     .slice(-4); 
 
 

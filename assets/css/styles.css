@@ -204,9 +204,23 @@ footer {
 
 
 
+#textBanner {
+    background: #1f1f1f;
+      position: absolute;
+    top: 8vh; 
+    width: 100%;
+    left: 0;
+    z-index: 9999;
+}
 
+#textBanner p {
+    font-size: 15px;
+    font-weight: 600;
+}
 
-
+#textBanner .carousel {
+    pointer-events: none; /* impede hover & clique, não faz bug */
+}
 
 
 
