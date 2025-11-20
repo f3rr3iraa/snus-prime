@@ -264,3 +264,68 @@ function initCheckoutValidation() {
     console.log("Formulário válido. Enviando...");
   });
 }
+
+let isSendingCheckout = false;
+
+document.getElementById("btn-buy").addEventListener("click", async () => {
+  if (isSendingCheckout) return;
+  isSendingCheckout = true;
+
+  try {
+    // Load cart
+    loadCart();
+
+    // Get payment method
+    const payments = document.querySelectorAll(".payment-check");
+    let paymentMethod = "";
+    payments.forEach((ch) => {
+      if (ch.checked) paymentMethod = ch.id; // "checkReferencia", "checkPayPal", "checkMao"
+    });
+
+    // Build dados object from form
+    const dados = {
+      nome: document.getElementById("nome-buy").value.trim(),
+      email: document.getElementById("email-buy").value.trim(),
+      contacto: document.getElementById("contacto-buy").value.trim(),
+      morada: document.getElementById("morada-buy").value.trim(),
+      cidade: document.getElementById("cidade-buy").value.trim(),
+      codigo_postal: document.getElementById("codigo-postal-buy").value.trim(),
+      local_encontro: document.getElementById("local-encontro-buy").value.trim(),
+      cart: cart.map(item => ({
+        name: item.name,
+        photoPath: item.photoPath,
+        price: item.price,
+        qt: item.qt
+      })),
+      total: cart.reduce((sum, item) => sum + item.price * item.qt, 0),
+      paymentMethod
+    };
+
+    // Send to Netlify function
+    const resposta = await fetch("/.netlify/functions/send-buy-confirmation", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(dados),
+    });
+
+    const resultado = await resposta.json();
+
+    if (resultado.success) {
+      showToast("✅ Compra confirmada! Email enviado.", "success");
+      // Clear cart
+      cart = [];
+      saveCart();
+      renderCart();
+      updateCartBadge();
+      // Reset form
+      document.getElementById("checkout-form").reset();
+    } else {
+      showToast("❌ Erro ao enviar confirmação da compra.", "error");
+    }
+  } catch (erro) {
+    console.error(erro);
+    showToast("⚠️ Erro de ligação com o servidor.", "error");
+  } finally {
+    isSendingCheckout = false;
+  }
+});
