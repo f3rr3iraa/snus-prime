@@ -58,7 +58,7 @@ exports.handler = async function (event, context) {
           ${filteredCart.map(item => `
             <tr>
               <td style="padding:8px; text-align:center;">
-                <img src="https://snus-prime.netlify.app/data/img/${item.image}.jpg" alt="${item.name}" style="width:60px; height:auto;">
+                <img src="https://snus-prime.netlify.app/data/img/${item.image}.webpg" alt="${item.name}" style="width:60px; height:auto;">
               </td>
               <td style="padding:8px;">${item.name}</td>
               <td style="padding:8px; text-align:center;">${item.qt}</td>
