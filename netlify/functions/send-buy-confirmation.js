@@ -24,11 +24,11 @@ exports.handler = async function (event, context) {
     let paymentDetails = "";
     if (paymentMethod === "entidade_referencia") {
       paymentDetails = `
-      Entidade: ${process.env.PAG_ENTIDADE}
-      Referência: ${process.env.PAG_REFERENCIA}
+      Entidade: 123465
+      Referência: 789456123
       `;
     } else if (paymentMethod === "paypal") {
-      paymentDetails = `Faça o pagamento via PayPal para: ${process.env.EMAIL_USER}`;
+      paymentDetails = `Faça o pagamento via PayPal para: snusprimestore@gmail.com`;
     } else {
       paymentDetails = "Método de pagamento desconhecido.";
     }
