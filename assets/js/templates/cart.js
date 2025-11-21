@@ -284,6 +284,7 @@ function initCheckoutValidation() {
     });
 
     if (!valid) return;
+    if (!cart || cart.length === 0) return;
 
     // SUCCESS
     console.log("Formulário válido. Enviando...");
