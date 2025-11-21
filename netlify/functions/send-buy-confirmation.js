@@ -116,6 +116,9 @@ exports.handler = async function (event, context) {
     <p style="font-size: 16px; margin-top: 10px;">
       <strong>Total: ${total.toFixed(2)}€</strong>
     </p>
+    ${total < 50 
+  ? `<p style="font-size: 12px; margin-top: 6px;">Taxas: 4.00€</p>` 
+  : ``}
 
     <hr style="border:none; border-top:1px solid #eee; margin:20px 0;">
 

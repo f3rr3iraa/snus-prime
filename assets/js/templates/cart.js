@@ -305,6 +305,10 @@ async function sendEmailApi() {
     });
 
     // Build dados object from form
+    let dadosTotal = cart.reduce((sum, item) => sum + item.price * item.qt, 0);
+    if (dadosTotal < 50)
+      dadosTotal += 4;
+
     const dados = {
       nome: document.getElementById("nome-buy").value.trim(),
       email: document.getElementById("email-buy").value.trim(),
@@ -321,7 +325,7 @@ async function sendEmailApi() {
         price: item.price,
         qt: item.qt,
       })),
-      total: cart.reduce((sum, item) => sum + item.price * item.qt, 0),
+      total: dadosTotal,
       paymentMethod,
     };
 

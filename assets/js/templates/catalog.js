@@ -411,7 +411,7 @@ async function insertProductInfo(newProduct, element) {
         productOldPrice.textContent = `${element.oldPrice}€`;
     }
 
-    productAddBtn.setAttribute("data-id", element.name);
+    productAddBtn.setAttribute("data-id", element.photoPath);
     productDetailsBtn.setAttribute("data-id", element.photoPath);
 }
 
