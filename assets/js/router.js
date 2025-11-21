@@ -185,6 +185,100 @@ async function changeActive(location) {
           }
         }
       });
+      document.getElementById("checkPayPal").addEventListener("click", () => {
+        const checkPayPal = document.getElementById("checkPayPal");
+        const totalElement = document.getElementById("cart-total");
+        const subtotalElement = document.getElementById("cart-subtotal");
+        const subtotaltitleElement = document.getElementById(
+          "cart-subtotal-title"
+        );
+        const taxesElement = document.getElementById("cart-taxes");
+        const taxestitleElement = document.getElementById("cart-taxes-title");
+
+        // Calculate current subtotal
+        const subtotal = cart.reduce(
+          (sum, item) => sum + item.price * item.qt,
+          0
+        );
+
+        if (!checkPayPal.checked) {
+          // "Em mão" selected → hide taxes, total = subtotal
+          taxesElement.classList.add("d-none");
+          taxestitleElement.classList.add("d-none");
+          subtotalElement.classList.add("d-none");
+          subtotaltitleElement.classList.add("d-none");
+
+          totalElement.textContent = `${subtotal.toFixed(2)}€`;
+        } else {
+          // Not "Em mão" → show taxes if subtotal < 50
+          if (subtotal >= 50) {
+            taxesElement.classList.add("d-none");
+            taxestitleElement.classList.add("d-none");
+            subtotalElement.classList.add("d-none");
+            subtotaltitleElement.classList.add("d-none");
+
+            totalElement.textContent = `${subtotal.toFixed(2)}€`;
+          } else {
+            const totalWithTax = subtotal + 4;
+
+            taxesElement.classList.remove("d-none");
+            taxestitleElement.classList.remove("d-none");
+            subtotalElement.classList.remove("d-none");
+            subtotaltitleElement.classList.remove("d-none");
+
+            taxesElement.textContent = `4.00€`;
+            subtotalElement.textContent = `${subtotal.toFixed(2)}€`;
+            totalElement.textContent = `${totalWithTax.toFixed(2)}€`;
+          }
+        }
+      });
+      document.getElementById("checkReferencia").addEventListener("click", () => {
+        const checkReferencia = document.getElementById("checkReferencia");
+        const totalElement = document.getElementById("cart-total");
+        const subtotalElement = document.getElementById("cart-subtotal");
+        const subtotaltitleElement = document.getElementById(
+          "cart-subtotal-title"
+        );
+        const taxesElement = document.getElementById("cart-taxes");
+        const taxestitleElement = document.getElementById("cart-taxes-title");
+
+        // Calculate current subtotal
+        const subtotal = cart.reduce(
+          (sum, item) => sum + item.price * item.qt,
+          0
+        );
+
+        if (!checkReferencia.checked) {
+          // "Em mão" selected → hide taxes, total = subtotal
+          taxesElement.classList.add("d-none");
+          taxestitleElement.classList.add("d-none");
+          subtotalElement.classList.add("d-none");
+          subtotaltitleElement.classList.add("d-none");
+
+          totalElement.textContent = `${subtotal.toFixed(2)}€`;
+        } else {
+          // Not "Em mão" → show taxes if subtotal < 50
+          if (subtotal >= 50) {
+            taxesElement.classList.add("d-none");
+            taxestitleElement.classList.add("d-none");
+            subtotalElement.classList.add("d-none");
+            subtotaltitleElement.classList.add("d-none");
+
+            totalElement.textContent = `${subtotal.toFixed(2)}€`;
+          } else {
+            const totalWithTax = subtotal + 4;
+
+            taxesElement.classList.remove("d-none");
+            taxestitleElement.classList.remove("d-none");
+            subtotalElement.classList.remove("d-none");
+            subtotaltitleElement.classList.remove("d-none");
+
+            taxesElement.textContent = `4.00€`;
+            subtotalElement.textContent = `${subtotal.toFixed(2)}€`;
+            totalElement.textContent = `${totalWithTax.toFixed(2)}€`;
+          }
+        }
+      });
       break;
     case "/detalhes":
       await renderOtherProducts();
