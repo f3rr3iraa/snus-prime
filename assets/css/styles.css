@@ -1,7 +1,7 @@
-
 /* geral */
 
-html, body {
+html,
+body {
   width: 100%;
   margin: 0;
   padding: 0;
@@ -10,16 +10,14 @@ html, body {
 }
 
 .background-purple {
-    background: linear-gradient(135deg, #7a35e8, #954dfc);
+  background: linear-gradient(135deg, #7a35e8, #954dfc);
 }
 
 .text-purple {
   color: #8c45f7;
 }
 
-
 /* ---Index--- */
-
 
 /* Navbar */
 
@@ -33,7 +31,7 @@ html, body {
 }
 
 .nav-link:hover {
-  color: #bfbfbf !important; 
+  color: #bfbfbf !important;
   text-decoration: none;
   cursor: pointer;
 }
@@ -53,17 +51,14 @@ html, body {
 
 .offcanvas {
   background-color: #efefef;
+  z-index: 9999 !important;
 }
 
 .offcanvas .nav-link {
   font-size: 1.1rem;
 }
 
-
-
-
 /* ---Produtos--- */
-
 
 /* Filtros */
 .form-check-input {
@@ -81,35 +76,24 @@ html, body {
   border-color: #7a35e8;
 }
 
-
-
-
-
-
 .novidade-inf {
-    background-color: #1c5a9d;
-    color: #ffffff;
-    padding: 4px 8px;
-    border-radius: 0px !important;  
-    display: inline-block;
+  background-color: #1c5a9d;
+  color: #ffffff;
+  padding: 4px 8px;
+  border-radius: 0px !important;
+  display: inline-block;
 }
 
 .promotion-inf {
-    background-color: #9d1f1c ;
-    color: #ffffff;
-    padding: 4px 8px;
-    border-radius: 0px !important;  
-    display: inline-block;
+  background-color: #9d1f1c;
+  color: #ffffff;
+  padding: 4px 8px;
+  border-radius: 0px !important;
+  display: inline-block;
 }
 
-
-
-
-
-
-
 .icon {
-  width: 40px;   
+  width: 40px;
   height: 40px;
 }
 
@@ -118,12 +102,10 @@ html, body {
 }
 
 footer {
-  margin-top: auto; 
+  margin-top: auto;
 }
 
-
 /* container */
-
 
 .container-home {
   height: 100vh;
@@ -132,10 +114,8 @@ footer {
 
 .container-inf {
   min-height: 20vh;
-  padding: 2rem 0;  
+  padding: 2rem 0;
 }
-
-
 
 .container-product-section {
   min-height: 75vh;
@@ -149,40 +129,31 @@ footer {
   background-color: #ffffff;
 }
 
+.contact-link {
+  color: #000 !important;
+  text-decoration: none;
+  display: block;
+  margin-bottom: 0.2rem;
+  transition: color 0.3s;
+}
 
-  .contact-link {
-    color: #000 !important; 
-    text-decoration: none;
-    display: block;
-    margin-bottom: 0.2rem; 
-    transition: color 0.3s;
-  }
-
-  .contact-link:hover {
-    color: #bfbfbf !important; 
-  }
-
-
-
+.contact-link:hover {
+  color: #bfbfbf !important;
+}
 
 /* carousel */
 .carousel-indicators .active {
-    background-color: #8c45f7; 
+  background-color: #8c45f7;
 }
-
 
 .carousel-indicators button:hover {
-    background-color: #8c45f7; 
+  background-color: #8c45f7;
 }
-
-
 
 /* icon branco */
 .white-icon {
   filter: brightness(0) invert(1);
 }
-
-
 
 .btn-contact {
   border-color: #8c45f7;
@@ -201,32 +172,51 @@ footer {
   transform: scale(1.02);
 }
 
-
-
-
 #textBanner {
-    background: #1f1f1f;
-      position: absolute;
-    top: 8vh; 
-    width: 100%;
-    left: 0;
-    z-index: 9999;
+  background: #1f1f1f;
+  position: absolute;
+  top: 8vh;
+  width: 100%;
+  left: 0;
+  z-index: 9997;
 }
-
 #textBanner p {
-    font-size: 15px;
-    font-weight: 600;
+  font-size: 15px;
+  font-weight: 600;
 }
-
 #textBanner .carousel {
-    pointer-events: none; /* impede hover & clique, não faz bug */
+  pointer-events: none; /* impede hover & clique, não faz bug */
 }
 
 
+.offcanvas-backdrop.show {
+   z-index: 9998;
+}
+
+/* --- MOBILE --- */
+@media (max-width: 576px) {
+  #textBanner {
+    position: relative; /* deixa o banner normal no fluxo */
+    top: 9vh;
+    padding: 10px 5px;
+  }
+
+  #textBanner p {
+    font-size: 10px;
+    line-height: 1.3;
+    padding: 0 8px;
+  }
+
+  /* Evita que o texto fique muito largo */
+  #textBanner .carousel-inner {
+    max-width: 95%;
+    margin: 0 auto;
+  }
+}
 
 .btn-see-details {
   position: absolute;
-  bottom: 4%; 
+  bottom: 4%;
   left: 50%;
   transform: translateX(-50%);
   width: 100%;
@@ -248,13 +238,10 @@ footer {
   visibility: visible;
 }
 
-
 .product-see-details:hover {
   cursor: pointer;
   transition: filter 0.3s ease;
 }
-
-
 
 .btn-price {
   background: linear-gradient(135deg, #8c45f7, #a56dfc);
@@ -266,32 +253,31 @@ footer {
 .btn-amount:focus {
   outline: none;
   box-shadow: none !important;
-  border-color: #cccccc; 
+  border-color: #cccccc;
 }
-
 
 /* --- ESTILO ESPECIAL PARA TABLET (MD) --- */
 @media (min-width: 768px) and (max-width: 1327px) {
-    #desktop-filters h6 {
-        font-size: 14px;
-    }
+  #desktop-filters h6 {
+    font-size: 14px;
+  }
 
-    .sort-options {
-        gap: 8px !important;
-        flex-wrap: wrap;
-    }
+  .sort-options {
+    gap: 8px !important;
+    flex-wrap: wrap;
+  }
 
-    .sort-options button {
-        font-size: 13px;
-        padding: 6px 10px;
-        flex: 1 1 100%;
-        text-align: center;
-    }
-} 
+  .sort-options button {
+    font-size: 13px;
+    padding: 6px 10px;
+    flex: 1 1 100%;
+    text-align: center;
+  }
+}
 
- .text-taxes {
-        font-size: 0.7rem;
-    }
+.text-taxes {
+  font-size: 0.7rem;
+}
 
 /* ---home--- */
 
@@ -301,8 +287,8 @@ footer {
   border: none;
   color: #ffffff;
   font-weight: 600;
-  font-size: 1.1rem; 
-  padding: 14px 32px; 
+  font-size: 1.1rem;
+  padding: 14px 32px;
   box-shadow: 0 6px 14px rgba(0, 0, 0, 0.35);
   cursor: pointer;
   transition: all 0.3s ease;
@@ -316,20 +302,18 @@ footer {
   transform: scale(1.03);
 }
 
-
 .btn-details {
   background-color: #ffffff;
   border-color: #ffffff;
 }
-
 
 .btn-details {
   background: #ffffff;
   border: none;
   color: #000000;
   font-weight: 600;
-  font-size: 1.1rem; 
-  padding: 14px 32px; 
+  font-size: 1.1rem;
+  padding: 14px 32px;
   box-shadow: 0 6px 14px rgba(0, 0, 0, 0.35);
   cursor: pointer;
   transition: all 0.3s ease;
@@ -343,7 +327,6 @@ footer {
   color: #ffffff;
 }
 
-
 .input-form {
   border-radius: 0;
   border-color: #eeeeee;
@@ -351,17 +334,13 @@ footer {
 }
 
 .input-form:focus {
-  outline: none; 
-  border-color: #cccccc; 
-  box-shadow: rgba(149, 157, 165, 0.3) 0px 4px 12px; 
+  outline: none;
+  border-color: #cccccc;
+  box-shadow: rgba(149, 157, 165, 0.3) 0px 4px 12px;
 }
 
-
-
-
-
 .input-form::placeholder {
-    color: #bfbfbf;
+  color: #bfbfbf;
 }
 
 .circle-maker {
@@ -373,24 +352,16 @@ footer {
   height: 24px;
 }
 
-
-
-
 /* container */
 
 .container-nav-section {
   height: 30vh;
 }
 
-
-
-
-
 /* */
 .container-nav-details {
   height: 8vh;
 }
-
 
 /* Details */
 
@@ -402,9 +373,6 @@ footer {
   border-color: #8c45f7 !important;
   cursor: pointer;
 }
-
-
-
 
 input[type="range"].custom-range {
   -webkit-appearance: none;
@@ -437,7 +405,7 @@ input[type="range"].custom-range::-webkit-slider-thumb {
   width: 28px;
   height: 28px;
   border-radius: 50%;
-  background: #FFF;
+  background: #fff;
   cursor: pointer;
   box-shadow: 0 3px 8px rgba(0, 0, 0, 0.4);
   margin-top: -7px;
@@ -452,7 +420,7 @@ input[type="range"].custom-range::-moz-range-thumb {
   width: 28px;
   height: 28px;
   border-radius: 50%;
-  background: #FFF;
+  background: #fff;
   cursor: pointer;
   box-shadow: 0 3px 8px rgba(0, 0, 0, 0.4);
   border: none;
@@ -463,13 +431,12 @@ input[type="range"].custom-range::-moz-range-thumb:active {
   box-shadow: 0 3px 20px rgba(0, 0, 0, 0.5);
 }
 
-
 .product-name-nicotine {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: block;
-  }
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;
+}
 
 /* para as "..." do nome do produto em mobile*/
 @media (max-width: 576px) {
@@ -481,11 +448,6 @@ input[type="range"].custom-range::-moz-range-thumb:active {
   }
 }
 
-
-
-
-
-
 .btn-cart,
 .btn-cart:focus,
 .btn-cart:active,
@@ -495,11 +457,11 @@ input[type="range"].custom-range::-moz-range-thumb:active {
   border: none !important;
 }
 
-.txt-footer{
+.txt-footer {
   cursor: pointer;
 }
 
-.txt-footer:hover{
+.txt-footer:hover {
   color: #bfbfbf !important;
 }
 
@@ -508,46 +470,38 @@ input[type="range"].custom-range::-moz-range-thumb:active {
   border: none;
   color: #ffffff;
   font-weight: 600;
-  padding: 14px 32px; 
+  padding: 14px 32px;
   box-shadow: 0 6px 14px rgba(0, 0, 0, 0.35);
   transition: all 0.3s ease;
   margin-right: 8px;
 }
-
-
 
 .navbar-toggler:focus {
   outline: none !important;
   box-shadow: none !important;
 }
 
-
 .btn-close:focus {
   outline: none !important;
   box-shadow: none !important;
 }
 
-
-
-
-
-
 .sort-btn {
-    background: none;
-    border: none;
-    color: black;
-    cursor: pointer;
-    transition: color 0.2s ease;
-    text-decoration: none;
-    padding: 0;
+  background: none;
+  border: none;
+  color: black;
+  cursor: pointer;
+  transition: color 0.2s ease;
+  text-decoration: none;
+  padding: 0;
 }
 
 .sort-btn:hover {
-    color: #bfbfbf;
+  color: #bfbfbf;
 }
 
 .sort-btn.active {
-    text-decoration: none;
-    color: black;
-    font-weight: bold;
+  text-decoration: none;
+  color: black;
+  font-weight: bold;
 }
