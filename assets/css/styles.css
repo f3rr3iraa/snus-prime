@@ -270,6 +270,24 @@ footer {
 }
 
 
+/* --- ESTILO ESPECIAL PARA TABLET (MD) --- */
+@media (min-width: 768px) and (max-width: 1327px) {
+    #desktop-filters h6 {
+        font-size: 14px;
+    }
+
+    .sort-options {
+        gap: 8px !important;
+        flex-wrap: wrap;
+    }
+
+    .sort-options button {
+        font-size: 13px;
+        padding: 6px 10px;
+        flex: 1 1 100%;
+        text-align: center;
+    }
+} 
 
 
 /* ---home--- */

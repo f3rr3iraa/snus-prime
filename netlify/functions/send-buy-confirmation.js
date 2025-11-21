@@ -39,7 +39,7 @@ exports.handler = async function (event, context) {
       paymentDetails = `
       Entidade: 123465
       Referência: 789456123
-      Total: ${total.toFixed(2)}
+      Montante: ${total.toFixed(2)}€
       `;
     } else if (paymentMethod === "checkPayPal") {
       paymentMethodGoodStyle = "Paypal";
@@ -72,6 +72,11 @@ exports.handler = async function (event, context) {
     </div>
 
     <h2 style="color:#333;">Obrigado pela sua compra, ${nome}!</h2>
+
+    <div style="background:#f8f8f8; padding:12px; border-radius:6px; white-space:pre-wrap; margin-bottom:15px;">
+      ${paymentDetails}
+    </div>
+
     <p>Segue abaixo o resumo do seu pedido:</p>
 
     <table style="width:100%; border-collapse: collapse; margin-top: 15px;">
@@ -107,12 +112,6 @@ exports.handler = async function (event, context) {
       <strong>Total: ${total.toFixed(2)}€</strong>
     </p>
 
-    <p><strong>Método de pagamento:</strong> ${paymentMethodGoodStyle}</p>
-
-    <div style="background:#f8f8f8; padding:12px; border-radius:6px; white-space:pre-wrap; margin-bottom:15px;">
-      ${paymentDetails}
-    </div>
-
     <hr style="border:none; border-top:1px solid #eee; margin:20px 0;">
 
     <p>Atenciosamente,<br>
@@ -141,8 +140,8 @@ exports.handler = async function (event, context) {
       <p><strong>Cidade:</strong> ${cidade}</p>
       <p><strong>Código Postal:</strong> ${codigo_postal}</p>
       <p><strong>Local de Encontro:</strong> ${local_encontro}</p>
-      <p><strong>Total:</strong> ${total.toFixed(2)}€</p>
       <p><strong>Método de pagamento:</strong> ${paymentMethodGoodStyle}</p>
+      <p><strong>Total:</strong> ${total.toFixed(2)}€</p>
     </div>
 
     <table style="width:100%; border-collapse: collapse; margin-top: 15px;">
@@ -173,11 +172,6 @@ exports.handler = async function (event, context) {
           .join("")}
       </tbody>
     </table>
-
-    <div style="background:#f8f8f8; padding:12px; border-radius:6px; white-space:pre-wrap; margin-top:15px;">
-      ${paymentDetails}
-    </div>
-
   </div>
 `;
 
