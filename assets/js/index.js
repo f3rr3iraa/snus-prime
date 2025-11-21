@@ -91,7 +91,7 @@ async function loadProducts() {
 }
 
 function addToCart(photoName) {
-  const product = products.find((p) => photoName.includes(p.name));
+  const product = products.find((p) => photoName.includes(p.photoPath));
   if (!product) return;
 
   cart = JSON.parse(localStorage.getItem("cart")) || cart;

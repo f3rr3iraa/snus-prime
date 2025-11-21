@@ -32,9 +32,32 @@ async function renderCart() {
         0
       );
 
+      const totalElement = document.getElementById("cart-total");
       const subtotalElement = document.getElementById("cart-subtotal");
-      if (subtotalElement) {
+      const subtotaltitleElement = document.getElementById(
+        "cart-subtotal-title"
+      );
+      const taxesElement = document.getElementById("cart-taxes");
+      const taxestitleElement = document.getElementById("cart-taxes-title");
+      if (subtotal.toFixed(2) >= 50) {
+        taxesElement.classList.add("d-none");
+        subtotalElement.classList.add("d-none");
+        taxestitleElement.classList.add("d-none");
+        subtotaltitleElement.classList.add("d-none");
+
+        totalElement.textContent = `${subtotal.toFixed(2)}€`;
+      } else {
+        let newSub = 0;
+        subtotal > 0 ? (newSub = subtotal + 4) : (newSub = 0);
+
+        taxesElement.classList.remove("d-none");
+        subtotalElement.classList.remove("d-none");
+        taxestitleElement.classList.remove("d-none");
+        subtotaltitleElement.classList.remove("d-none");
+
+        taxesElement.textContent = `4.00€`;
         subtotalElement.textContent = `${subtotal.toFixed(2)}€`;
+        totalElement.textContent = `${newSub.toFixed(2)}€`;
       }
     })
     .catch((error) => console.error("Error loading cart template:", error));

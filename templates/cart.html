@@ -37,9 +37,18 @@
   <form id="checkout-form"
     class="col-md-3 col-12 px-md-4 px-3 py-2 needs-validation" novalidate>
     <h1>Sumário</h1>
-    <h4 class="fw-normal">Subtotal: <span id="cart-subtotal"
-        class="fw-bold">0.00€</span></h4>
-    <h4 class="mt-2 fw-normal">Método de Pagamento</h4>
+    
+    
+    <h4 class="fw-normal mb-2">Total: <span id="cart-total"
+      class="fw-bold">0.00€</span></h4>
+      <h6 class="fw-normal mb-0" id="cart-subtotal-title">Subtotal <span id="cart-subtotal"
+      class="fw-normal">0.00€</span><br>
+    </h6>
+    <h6 class="fw-normal mb-0" id="cart-taxes-title">Taxas de Envio: <span id="cart-taxes"
+      class="fw-normal">4.00€</span><br>
+    </h6>
+    <span class="text-taxes mt-0">Compras acimas de 50€ têm portes gratis</span>
+    <h5 class="mt-4 fw-normal">Método de Pagamento</h5>
     <div class="form-check my-2">
       <input class="form-check-input payment-check" type="checkbox"
         name="payment" id="checkReferencia">
@@ -140,3 +149,5 @@
       class="mt-2 p-2 btn-buy w-100 btn-sm" id="btn-buy">Confirmar</button>
   </form>
 </div>
+
+<div id="toastContainer" style="position: fixed; bottom: 20px; right: 20px; z-index: 9999;"></div>

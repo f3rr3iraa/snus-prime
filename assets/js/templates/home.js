@@ -54,6 +54,6 @@ async function insertCarouselProductInfo(NewCarouselProduct, element, i) {
     if (i == 0)
         carouselItem.classList.add("active");
 
-    carouselAddBtn.setAttribute("data-id", element.name);
+    carouselAddBtn.setAttribute("data-id", element.photoPath);
     carouselDetailsBtn.setAttribute("data-id", element.photoPath);
 }
