@@ -10,7 +10,7 @@ exports.handler = async function (event, context) {
   }
 
   try {
-    const { nome, email, cart, total, paymentMethod } = JSON.parse(event.body);
+    const { nome, email, contacto, morada, cidade, codigo_postal, local_encontro, cart, total, paymentMethod } = JSON.parse(event.body);
 
     const transporter = nodemailer.createTransport({
       service: "gmail",
@@ -22,21 +22,27 @@ exports.handler = async function (event, context) {
 
     // Payment instructions
     let paymentDetails = "";
-    if (paymentMethod === "entidade_referencia") {
+    let paymentMethodGoodStyle = "";
+    if (paymentMethod === "checkReferencia") {
+      paymentMethodGoodStyle = "Entidade / Referência"
       paymentDetails = `
       Entidade: 123465
       Referência: 789456123
       `;
-    } else if (paymentMethod === "paypal") {
+    } else if (paymentMethod === "checkPayPal") {
+      paymentMethodGoodStyle = "Paypal"
       paymentDetails = `Faça o pagamento via PayPal para: snusprimestore@gmail.`;
+    } else if (paymentMethod === "checkMao") {
+      paymentMethodGoodStyle = "Local de Encontro"
+      paymentDetails = `Faça o pagamento em mão, no local de encontro: ${local_encontro}`;
     } else {
-      paymentDetails = "Método de pagamento desconhecido.";
+      paymentMethodGoodStyle = "Desconhecido"
+      paymentDetails = "Método de pagamento desconhecido. Entraremos em contacto quando possível!";
     }
 
     // Filter cart items to only needed fields
     const filteredCart = cart.map(item => ({
       name: item.name,
-      image: item.photoPath,
       price: item.price,
       qt: item.qt
     }));
@@ -48,7 +54,6 @@ exports.handler = async function (event, context) {
       <table style="width:100%; border-collapse: collapse;">
         <thead>
           <tr>
-            <th style="border-bottom:1px solid #ddd; padding: 8px;">Imagem</th>
             <th style="border-bottom:1px solid #ddd; padding: 8px;">Produto</th>
             <th style="border-bottom:1px solid #ddd; padding: 8px;">Quantidade</th>
             <th style="border-bottom:1px solid #ddd; padding: 8px;">Preço (€)</th>
@@ -57,9 +62,6 @@ exports.handler = async function (event, context) {
         <tbody>
           ${filteredCart.map(item => `
             <tr>
-              <td style="padding:8px; text-align:center;">
-                <img src="https://snus-prime.netlify.app/data/img/${item.image}.webpg" alt="${item.name}" style="width:60px; height:auto;">
-              </td>
               <td style="padding:8px;">${item.name}</td>
               <td style="padding:8px; text-align:center;">${item.qt}</td>
               <td style="padding:8px; text-align:right;">${(item.price * item.qt).toFixed(2)}</td>
@@ -68,7 +70,7 @@ exports.handler = async function (event, context) {
         </tbody>
       </table>
       <p><strong>Total: ${total.toFixed(2)}€</strong></p>
-      <p>Método de pagamento: ${paymentMethod}</p>
+      <p>Método de pagamento: ${paymentMethodGoodStyle}</p>
       <pre>${paymentDetails}</pre>
       <hr>
       <p>Atenciosamente,</p>
@@ -80,8 +82,13 @@ exports.handler = async function (event, context) {
       <h2>Nova compra realizada!</h2>
       <p>Cliente: ${nome}</p>
       <p>Email: ${email}</p>
+      <p>Contacto: ${contacto}</p>
+      <p>Morada: ${morada}</p>
+      <p>Cidade: ${cidade}</p>
+      <p>Codigo Postal: ${codigo_postal}</p>
+      <p>Local de Encontro: ${local_encontro}</p>
       <p>Total: ${total.toFixed(2)}€</p>
-      <p>Método de pagamento: ${paymentMethod}</p>
+      <p>Método de pagamento: ${paymentMethodGoodStyle}</p>
       <table style="width:100%; border-collapse: collapse;">
         <thead>
           <tr>
@@ -105,14 +112,14 @@ exports.handler = async function (event, context) {
 
     // Send emails
     await transporter.sendMail({
-      from: `"Sua Empresa" <${process.env.EMAIL_USER}>`,
+      from: `"SNUS PRIME" <${process.env.EMAIL_USER}>`,
       to: email,
       subject: "Confirmação da sua compra",
       html: buyerHtml,
     });
 
     await transporter.sendMail({
-      from: `"Sua Empresa" <${process.env.EMAIL_USER}>`,
+      from: `"SNUS PRIME" <${process.env.EMAIL_USER}>`,
       to: process.env.EMAIL_USER,
       subject: `Nova compra de ${nome}`,
       html: adminHtml,

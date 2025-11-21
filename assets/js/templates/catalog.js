@@ -212,41 +212,63 @@ function sortProducts(productsArray) {
     return sorted;
 }
 
+
 function initSortButtons() {
-    const buttons = [
-        { asc: "sort-asc", desc: "sort-desc" },
-        { asc: "sort-asc-mobile", desc: "sort-desc-mobile" }
-    ];
+    const ascSelector = '#sort-asc, #sort-asc-mobile';
+    const descSelector = '#sort-desc, #sort-desc-mobile';
 
-    buttons.forEach(btnGroup => {
-        const sortAscBtn = document.getElementById(btnGroup.asc);
-        const sortDescBtn = document.getElementById(btnGroup.desc);
+    function removeActiveFromAllButtonsLocal() {
+        document.querySelectorAll('.sort-btn').forEach(btn => btn.classList.remove('active'));
+    }
 
-        if (!sortAscBtn || !sortDescBtn) return;
+    function setActiveButtonLocal(type) {
+        removeActiveFromAllButtonsLocal();
+        if (type === 'asc') {
+            document.querySelectorAll('#sort-asc, #sort-asc-mobile').forEach(btn => btn.classList.add('active'));
+        } else if (type === 'desc') {
+            document.querySelectorAll('#sort-desc, #sort-desc-mobile').forEach(btn => btn.classList.add('active'));
+        }
+    }
 
-        sortAscBtn.addEventListener("click", () => {
-            if (currentSort === "asc") {
-                currentSort = null; 
-                removeActiveFromAllButtons();
-            } else {
-                currentSort = "asc";
-                setActiveButton("asc");
-            }
-            applyFilters();
-        });
+    const savedSort = localStorage.getItem('currentSort');
+    if (savedSort) currentSort = savedSort;
 
-        sortDescBtn.addEventListener("click", () => {
-            if (currentSort === "desc") {
+    document.querySelectorAll(ascSelector).forEach(btn => {
+        btn.addEventListener('click', () => {
+            if (currentSort === 'asc') {
                 currentSort = null;
-                removeActiveFromAllButtons();
+                localStorage.removeItem('currentSort');
+                removeActiveFromAllButtonsLocal();
             } else {
-                currentSort = "desc";
-                setActiveButton("desc");
+                currentSort = 'asc';
+                localStorage.setItem('currentSort', 'asc');
+                setActiveButtonLocal('asc');
             }
             applyFilters();
         });
     });
+
+    document.querySelectorAll(descSelector).forEach(btn => {
+        btn.addEventListener('click', () => {
+            if (currentSort === 'desc') {
+                currentSort = null;
+                localStorage.removeItem('currentSort');
+                removeActiveFromAllButtonsLocal();
+            } else {
+                currentSort = 'desc';
+                localStorage.setItem('currentSort', 'desc');
+                setActiveButtonLocal('desc');
+            }
+            applyFilters();
+        });
+    });
+
+    if (currentSort) {
+        setActiveButtonLocal(currentSort);
+        applyFilters();
+    }
 }
+
 
 function removeActiveFromAllButtons() {
     document.querySelectorAll(".sort-btn").forEach(btn => btn.classList.remove("active"));
