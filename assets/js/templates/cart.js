@@ -291,50 +291,6 @@ function initCheckoutValidation() {
   });
 }
 
-document.getElementById("checkMao").addEventListener("click", () => {
-  const checkMao = document.getElementById("checkMao");
-  const totalElement = document.getElementById("cart-total");
-  const subtotalElement = document.getElementById("cart-subtotal");
-  const subtotaltitleElement = document.getElementById("cart-subtotal-title");
-  const taxesElement = document.getElementById("cart-taxes");
-  const taxestitleElement = document.getElementById("cart-taxes-title");
-
-  // Calculate current subtotal
-  const subtotal = cart.reduce((sum, item) => sum + item.price * item.qt, 0);
-
-  if (checkMao.checked) {
-    // "Em mão" selected → hide taxes, total = subtotal
-    taxesElement.classList.add("d-none");
-    taxestitleElement.classList.add("d-none");
-    subtotalElement.classList.add("d-none");
-    subtotaltitleElement.classList.add("d-none");
-
-    totalElement.textContent = `${subtotal.toFixed(2)}€`;
-  } else {
-    // Not "Em mão" → show taxes if subtotal < 50
-    if (subtotal >= 50) {
-      taxesElement.classList.add("d-none");
-      taxestitleElement.classList.add("d-none");
-      subtotalElement.classList.add("d-none");
-      subtotaltitleElement.classList.add("d-none");
-
-      totalElement.textContent = `${subtotal.toFixed(2)}€`;
-    } else {
-      const totalWithTax = subtotal + 4;
-
-      taxesElement.classList.remove("d-none");
-      taxestitleElement.classList.remove("d-none");
-      subtotalElement.classList.remove("d-none");
-      subtotaltitleElement.classList.remove("d-none");
-
-      taxesElement.textContent = `4.00€`;
-      subtotalElement.textContent = `${subtotal.toFixed(2)}€`;
-      totalElement.textContent = `${totalWithTax.toFixed(2)}€`;
-    }
-  }
-});
-
-
 async function sendEmailApi() {
   if (isSendingCheckout) return;
   isSendingCheckout = true;
