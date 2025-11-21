@@ -56,6 +56,7 @@ exports.handler = async function (event, context) {
     // Filter cart items to only needed fields
     const filteredCart = cart.map((item) => ({
       name: item.name,
+      brand: item.brand,
       price: item.price,
       qt: item.qt,
     }));
@@ -82,6 +83,7 @@ exports.handler = async function (event, context) {
     <table style="width:100%; border-collapse: collapse; margin-top: 15px;">
       <thead>
         <tr>
+          <th style="border-bottom: 2px solid #eaeaea; padding: 10px; text-align:left;">Marca</th>
           <th style="border-bottom: 2px solid #eaeaea; padding: 10px; text-align:left;">Produto</th>
           <th style="border-bottom: 2px solid #eaeaea; padding: 10px; text-align:center;">Quantidade</th>
           <th style="border-bottom: 2px solid #eaeaea; padding: 10px; text-align:right;">Preço (€)</th>
@@ -92,6 +94,9 @@ exports.handler = async function (event, context) {
           .map(
             (item) => `
           <tr>
+            <td style="padding:10px; text-align:center; border-bottom: 1px solid #f0f0f0;">${
+              item.brand
+            }</td>
             <td style="padding:10px; border-bottom: 1px solid #f0f0f0;">${
               item.name
             }</td>
@@ -147,6 +152,7 @@ exports.handler = async function (event, context) {
     <table style="width:100%; border-collapse: collapse; margin-top: 15px;">
       <thead>
         <tr>
+          <th style="border-bottom: 2px solid #eaeaea; padding: 10px; text-align:left;">Marca</th>
           <th style="border-bottom: 2px solid #eaeaea; padding: 10px; text-align:left;">Produto</th>
           <th style="border-bottom: 2px solid #eaeaea; padding: 10px; text-align:center;">Quantidade</th>
           <th style="border-bottom: 2px solid #eaeaea; padding: 10px; text-align:right;">Preço (€)</th>
@@ -157,6 +163,9 @@ exports.handler = async function (event, context) {
           .map(
             (item) => `
           <tr>
+            <td style="padding:10px; border-bottom: 1px solid #f0f0f0;">${
+              item.brand
+            }</td>
             <td style="padding:10px; border-bottom: 1px solid #f0f0f0;">${
               item.name
             }</td>

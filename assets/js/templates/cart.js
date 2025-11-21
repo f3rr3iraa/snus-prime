@@ -177,7 +177,6 @@ function updateCartBadge() {
 
 let isSendingCheckout = false;
 
-
 function initCheckoutValidation() {
   const btn = document.querySelector(".btn-buy");
   if (!btn) {
@@ -232,73 +231,102 @@ function initCheckoutValidation() {
   });
 
   // Buy button click handler
-  document.getElementById("btn-buy").addEventListener("click", async () => {
-    if (isSendingCheckout) return;
-    isSendingCheckout = true;
+  btn.addEventListener("click", async () => {
+    const form = document.getElementById("checkout-form");
+    let valid = true;
 
-    try {
-      // Load cart
-      loadCart();
-
-      // Get payment method
-      const payments = document.querySelectorAll(".payment-check");
-      let paymentMethod = "";
-      payments.forEach((ch) => {
-        if (ch.checked) paymentMethod = ch.id; // "checkReferencia", "checkPayPal", "checkMao"
-      });
-
-      // Build dados object from form
-      const dados = {
-        nome: document.getElementById("nome-buy").value.trim(),
-        email: document.getElementById("email-buy").value.trim(),
-        contacto: document.getElementById("contacto-buy").value.trim(),
-        morada: document.getElementById("morada-buy").value.trim(),
-        cidade: document.getElementById("cidade-buy").value.trim(),
-        codigo_postal: document
-          .getElementById("codigo-postal-buy")
-          .value.trim(),
-        local_encontro: document
-          .getElementById("local-encontro-buy")
-          .value.trim(),
-        cart: cart.map((item) => ({
-          name: item.name,
-          photoPath: item.photoPath,
-          price: item.price,
-          qt: item.qt,
-        })),
-        total: cart.reduce((sum, item) => sum + item.price * item.qt, 0),
-        paymentMethod,
-      };
-
-      // Send to Netlify function
-      const resposta = await fetch(
-        "/.netlify/functions/send-buy-confirmation",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(dados),
-        }
-      );
-
-      const resultado = await resposta.json();
-
-      if (resultado.success) {
-        showToast("✅ Compra confirmada! Email enviado.", "success");
-        // Clear cart
-        cart = [];
-        saveCart();
-        renderCart();
-        updateCartBadge();
-        // Reset form
-        document.getElementById("checkout-form").reset();
-      } else {
-        showToast("❌ Erro ao enviar confirmação da compra.", "error");
-      }
-    } catch (erro) {
-      console.error(erro);
-      showToast("⚠️ Erro de ligação com o servidor.", "error");
-    } finally {
-      isSendingCheckout = false;
+    // Validate payment method
+    const oneChecked = Array.from(payments).some((ch) => ch.checked);
+    if (!oneChecked) {
+      valid = false;
+      paymentError.classList.add("d-block");
+      paymentError.classList.remove("d-none");
+    } else {
+      paymentError.classList.add("d-none");
+      paymentError.classList.remove("d-block");
     }
+
+    // Validate text inputs
+    form.querySelectorAll("input").forEach((input) => {
+      if (input.required && !input.value.trim()) {
+        input.classList.add("is-invalid");
+        input.classList.remove("is-valid"); // ensure no green
+        valid = false;
+      } else {
+        input.classList.remove("is-invalid");
+        input.classList.remove("is-valid"); // keep default look
+      }
+    });
+
+    if (!valid) return;
+
+    // SUCCESS
+    console.log("Formulário válido. Enviando...");
+    await sendEmailApi();
   });
+}
+
+async function sendEmailApi() {
+  if (isSendingCheckout) return;
+  isSendingCheckout = true;
+
+  try {
+    // Load cart
+    loadCart();
+
+    // Get payment method
+    const payments = document.querySelectorAll(".payment-check");
+    let paymentMethod = "";
+    payments.forEach((ch) => {
+      if (ch.checked) paymentMethod = ch.id; // "checkReferencia", "checkPayPal", "checkMao"
+    });
+
+    // Build dados object from form
+    const dados = {
+      nome: document.getElementById("nome-buy").value.trim(),
+      email: document.getElementById("email-buy").value.trim(),
+      contacto: document.getElementById("contacto-buy").value.trim(),
+      morada: document.getElementById("morada-buy").value.trim(),
+      cidade: document.getElementById("cidade-buy").value.trim(),
+      codigo_postal: document.getElementById("codigo-postal-buy").value.trim(),
+      local_encontro: document
+        .getElementById("local-encontro-buy")
+        .value.trim(),
+      cart: cart.map((item) => ({
+        name: item.name,
+        brand: item.brand,
+        price: item.price,
+        qt: item.qt,
+      })),
+      total: cart.reduce((sum, item) => sum + item.price * item.qt, 0),
+      paymentMethod,
+    };
+
+    // Send to Netlify function
+    const resposta = await fetch("/.netlify/functions/send-buy-confirmation", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(dados),
+    });
+
+    const resultado = await resposta.json();
+
+    if (resultado.success) {
+      showToast("✅ Compra confirmada! Email enviado.", "success");
+      // Clear cart
+      cart = [];
+      saveCart();
+      renderCart();
+      updateCartBadge();
+      // Reset form
+      document.getElementById("checkout-form").reset();
+    } else {
+      showToast("❌ Erro ao enviar confirmação da compra.", "error");
+    }
+  } catch (erro) {
+    console.error(erro);
+    showToast("⚠️ Erro de ligação com o servidor.", "error");
+  } finally {
+    isSendingCheckout = false;
+  }
 }
