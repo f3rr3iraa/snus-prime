@@ -217,6 +217,7 @@ function initSortButtons() {
     const ascSelector = '#sort-asc, #sort-asc-mobile';
     const descSelector = '#sort-desc, #sort-desc-mobile';
 
+    // Helpers
     function removeActiveFromAllButtonsLocal() {
         document.querySelectorAll('.sort-btn').forEach(btn => btn.classList.remove('active'));
     }
@@ -230,11 +231,34 @@ function initSortButtons() {
         }
     }
 
-    const savedSort = localStorage.getItem('currentSort');
-    if (savedSort) currentSort = savedSort;
+    // Se não houver botões no DOM (por ex. rota errada), sair sem erro
+    const ascButtons = Array.from(document.querySelectorAll(ascSelector));
+    const descButtons = Array.from(document.querySelectorAll(descSelector));
+    if (ascButtons.length === 0 && descButtons.length === 0) {
+        console.debug('[initSortButtons] nenhum botão de sort encontrado — nenhum listener ligado');
+        return;
+    }
 
-    document.querySelectorAll(ascSelector).forEach(btn => {
-        btn.addEventListener('click', () => {
+    // Restaura estado
+    const savedSort = localStorage.getItem('currentSort');
+    if (savedSort === 'asc' || savedSort === 'desc') {
+        currentSort = savedSort;
+    } else {
+        currentSort = null;
+    }
+
+    // Remove listeners previamente ligados (idempotência)
+    function cloneAndReplace(el) {
+        const clone = el.cloneNode(true);
+        el.parentNode.replaceChild(clone, el);
+        return clone;
+    }
+
+    // Liga listeners ASC
+    ascButtons.forEach(btn => {
+        const b = cloneAndReplace(btn);
+        if (!b.classList.contains('sort-btn')) b.classList.add('sort-btn');
+        b.addEventListener('click', () => {
             if (currentSort === 'asc') {
                 currentSort = null;
                 localStorage.removeItem('currentSort');
@@ -244,12 +268,16 @@ function initSortButtons() {
                 localStorage.setItem('currentSort', 'asc');
                 setActiveButtonLocal('asc');
             }
+            console.debug('[sort] currentSort ->', currentSort);
             applyFilters();
         });
     });
 
-    document.querySelectorAll(descSelector).forEach(btn => {
-        btn.addEventListener('click', () => {
+    // Liga listeners DESC
+    descButtons.forEach(btn => {
+        const b = cloneAndReplace(btn);
+        if (!b.classList.contains('sort-btn')) b.classList.add('sort-btn');
+        b.addEventListener('click', () => {
             if (currentSort === 'desc') {
                 currentSort = null;
                 localStorage.removeItem('currentSort');
@@ -259,15 +287,21 @@ function initSortButtons() {
                 localStorage.setItem('currentSort', 'desc');
                 setActiveButtonLocal('desc');
             }
+            console.debug('[sort] currentSort ->', currentSort);
             applyFilters();
         });
     });
 
+    // Aplica estado guardado visualmente e executa ordenação no load da rota
     if (currentSort) {
         setActiveButtonLocal(currentSort);
+        console.debug('[sort] restored from localStorage ->', currentSort);
         applyFilters();
+    } else {
+        removeActiveFromAllButtonsLocal();
     }
 }
+
 
 
 function removeActiveFromAllButtons() {
