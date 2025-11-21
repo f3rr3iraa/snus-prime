@@ -33,7 +33,17 @@ exports.handler = async function (event, context) {
 
     // Payment instructions
     // Add tax if total < 50
-    const finalTotal = total < 50 ? total + 4 : total;
+    // If payment is "Em mão", no shipping tax, even if total < 50
+    let finalTotal;
+
+    if (paymentMethod === "checkMao") {
+      finalTotal = total;
+    } else if (total < 50) {
+      finalTotal = total + 4;
+    } else {
+      finalTotal = total;
+    }
+
     let paymentDetails = "";
     let paymentMethodGoodStyle = "";
     if (paymentMethod === "checkReferencia") {
@@ -118,7 +128,12 @@ exports.handler = async function (event, context) {
     <p style="font-size: 16px; margin-top: 10px;">
       <strong>Total: ${finalTotal.toFixed(2)}€</strong>
     </p>
-    ${total < 50 ? `<p style="font-size: 12px;" >Taxas: 4.00€ (já incluido no valor total)</p>` : ``}
+    ${
+      paymentMethod !== "checkMao" && total < 50
+        ? `<p style="font-size: 12px;">Taxas: 4.00€ (já incluído no valor total)</p>`
+        : ``
+    }
+
 
     <hr style="border:none; border-top:1px solid #eee; margin:20px 0;">
 

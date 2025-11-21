@@ -39,16 +39,19 @@ async function renderCart() {
       );
       const taxesElement = document.getElementById("cart-taxes");
       const taxestitleElement = document.getElementById("cart-taxes-title");
-      if (subtotal.toFixed(2) >= 50) {
+      const payMao = document.getElementById("checkMao")?.checked;
+
+      // If subtotal >= 50 OR "Em mão" -> FREE SHIPPING
+      if (subtotal >= 50 || payMao) {
         taxesElement.classList.add("d-none");
         subtotalElement.classList.add("d-none");
         taxestitleElement.classList.add("d-none");
         subtotaltitleElement.classList.add("d-none");
 
         totalElement.textContent = `${subtotal.toFixed(2)}€`;
-      } else {
-        let newSub = 0;
-        subtotal > 0 ? (newSub = subtotal + 4) : (newSub = 0);
+      }
+      else {
+        const newSub = subtotal > 0 ? subtotal + 4 : 0;
 
         taxesElement.classList.remove("d-none");
         subtotalElement.classList.remove("d-none");
@@ -305,10 +308,6 @@ async function sendEmailApi() {
     });
 
     // Build dados object from form
-    let dadosTotal = cart.reduce((sum, item) => sum + item.price * item.qt, 0);
-    if (dadosTotal < 50)
-      dadosTotal += 4;
-
     const dados = {
       nome: document.getElementById("nome-buy").value.trim(),
       email: document.getElementById("email-buy").value.trim(),
@@ -325,7 +324,7 @@ async function sendEmailApi() {
         price: item.price,
         qt: item.qt,
       })),
-      total: dadosTotal,
+      total: cart.reduce((sum, item) => sum + item.price * item.qt, 0),
       paymentMethod,
     };
 
