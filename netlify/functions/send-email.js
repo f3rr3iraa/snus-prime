@@ -20,11 +20,43 @@ exports.handler = async function (event, context) {
       },
     });
 
+    const contactHtml = `
+  <div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto; color: #222;">
+    
+    <!-- Logo -->
+    <div style="text-align: center; margin-bottom: 20px;">
+      <img src="https://snus-prime.netlify.app/assets/images/snus-prime_logo.png" 
+           alt="SNUS PRIME" 
+           style="max-width: 160px;">
+    </div>
+
+    <h2 style="color:#333;">Novo contacto recebido</h2>
+
+    <p>Um utilizador enviou uma nova mensagem através do formulário de contacto:</p>
+
+    <div style="background:#f8f8f8; padding:15px; border-radius:6px; margin:20px 0;">
+      <p><strong>Nome:</strong> ${nome}</p>
+      <p><strong>Email:</strong> ${email}</p>
+      <p><strong>Contacto:</strong> ${contacto || "Não fornecido"}</p>
+      <p><strong>Assunto:</strong> ${assunto}</p>
+    </div>
+
+    <h3 style="margin-top: 10px; color:#333;">Mensagem:</h3>
+    <div style="background:#fafafa; padding:15px; border-left:4px solid #ccc; white-space:pre-wrap; border-radius:4px;">
+      ${mensagem}
+    </div>
+
+    <hr style="border:none; border-top:1px solid #eee; margin:20px 0;">
+    
+    <p style="font-size:14px; color:#555;">Este email foi gerado automaticamente pelo website SNUS PRIME.</p>
+  </div>
+`;
+
     await transporter.sendMail({
       from: `"${nome}" <${email}>`,
       to: process.env.EMAIL_USER,
       subject: assunto,
-      text: `Nome: ${nome}\nEmail: ${email}\nContacto: ${contacto}\n\nMensagem:\n${mensagem}`,
+      html: contactHtml,
     });
 
     console.log("✅ Email sent successfully!");
