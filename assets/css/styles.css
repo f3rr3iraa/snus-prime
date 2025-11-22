@@ -47,6 +47,7 @@ body {
 
 .navbar {
   height: 8vh;
+  z-index: 9997 !important;
 }
 
 .offcanvas {
@@ -178,7 +179,7 @@ footer {
   top: 8vh;
   width: 100%;
   left: 0;
-  z-index: 9997;
+  z-index: 9996;
 }
 #textBanner p {
   font-size: 15px;
